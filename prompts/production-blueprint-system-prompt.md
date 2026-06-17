@@ -46,7 +46,11 @@ All fields must be present. Use additionalProperties: false strictly.
 - **adaptationFocus** (string)
 - **whatMustNotBeLost** (string)
 - **acceptedRecommendationIds** (array of UUIDs)
-- **creativeDNAProtected** (array): element (enum: "archetype" | "arc" | "relationship" | "theme" | "conflict" | "emotional-function" | "motivation" | "other"), function (string)
+- **creativeDNAProtected** (array): Each item must have:
+  - **element** (enum): EXACTLY one of: "archetype" | "arc" | "relationship" | "theme" | "conflict" | "emotional-function" | "motivation" | "other"
+  - **function** (string): How this element functions in the adaptation
+
+**CRITICAL:** creativeDNAProtected[].element must use ONLY the exact enum values listed above. No other values are permitted.
 
 ## Target Medium Enums
 
@@ -114,6 +118,28 @@ All fields must be present. Use additionalProperties: false strictly.
 ### sonicLanguage dialogueDensity Enum
 dialogueDensity: "dialogue-heavy" | "dialogue-moderate" | "dialogue-light" | "mostly-silent" | "varied"
 
+## Visual Language - Meaningful Objects
+
+**CRITICAL PROPERTY NAME:** visualLanguage.meaningfulObjects[] items MUST use the exact property name `narrative_significance` (with underscore).
+
+**Required object shape:**
+```json
+{
+  "object": "string describing the object or prop",
+  "narrative_significance": "string explaining why this object matters to the story"
+}
+```
+
+**DO NOT use:**
+- `narrativeSignificance` (camelCase) ❌
+- `significance` ❌
+- Any other property names ❌
+
+**ONLY use:**
+- `narrative_significance` (snake_case with underscore) ✅
+
+The schema enforces `additionalProperties: false`, so any deviation will cause validation failure.
+
 ## Example JSON Structure
 
 ```json
@@ -121,7 +147,7 @@ dialogueDensity: "dialogue-heavy" | "dialogue-moderate" | "dialogue-light" | "mo
   "blueprintId": "550e8400-e29b-41d4-a716-446655440000",
   "sourceTitle": "[Title]",
   "createdAt": "2026-06-17T14:30:00Z",
-  "targetMedium": {"format": "short-film", "platform": "festival", "duration": {"minimumSeconds": 540, "maximumSeconds": 900}},
+  "targetMedium": {"format": "short-film", "platform": "festival", "duration": {"minimumSeconds": 540, "maximumSeconds": 900}, "additionalContext": "Festival short film"},
   "targetDuration": {"minimumMinutes": 9, "maximumMinutes": 15},
   "decisionSummary": {"totalRecommendationsReviewed": 10, "acceptedCount": 7, "rejectedCount": 2, "pendingCount": 1, "unresolvedCreativeDecisions": ["Opening"], "intendedAudience": "[Audience]"},
   "adaptationDirection": {"approach": "[Approach]", "centralEmotionalPromise": "[Promise]", "corePremiseToPreserve": "[Premise]", "primaryThemesToProtect": ["[Theme]"], "intendedAudienceExperience": "[Experience]", "majorAdaptationPriorities": ["[Priority]"], "majorCreativeBoundaries": ["[Boundary]"]},
@@ -138,7 +164,7 @@ dialogueDensity: "dialogue-heavy" | "dialogue-moderate" | "dialogue-light" | "mo
   "sonicLanguage": {"overallApproach": "[Approach]", "musicDirection": "[Direction]", "recurringMusicMotifs": [{"motif": "[Motif]", "purpose": "[Purpose]"}], "ambientSoundStrategy": "[Strategy]", "recurringSoundMotifs": [{"sound": "[Sound]", "meaning": "[Meaning]"}], "silenceAndRestraint": "[Silence]", "dialogueDensity": "dialogue-moderate", "offScreenSoundOpportunities": ["[Opp]"], "emotionalSoundTransitions": "[Transitions]", "symbolicAudioElements": [{"element": "[El]", "symbolism": "[Sym]"}]},
   "pacingPlan": {"openingPace": "[Pace]", "earlyDevelopment": "[Dev]", "midpointShift": "[Shift]", "escalation": "[Escalation]", "climaxTiming": "[Timing]", "resolution": "[Res]", "endingRhythm": "[Rhythm]", "runtimeAllocation": {"openingMinutes": 1.5, "developmentMinutes": 7, "midpointMinutes": 1, "escalationMinutes": 2.5, "climaxMinutes": 1.5, "resolutionMinutes": 1}},
   "productionConsiderations": {"summary": "[Summary]", "essentialNeeds": [{"need": "[Need]", "category": "location", "priority": "essential"}], "locationRequirements": ["[Loc]"], "castComplexity": {"speakingRoles": 4, "backgroundCastNeeds": "[Needs]"}, "technicalConsiderations": {"complexBlocking": false, "nightOrExteriorShooting": true, "weatherDependent": false, "continuityConcerns": ["[Concern]"]}, "highCostElements": ["[Element]"], "simplificationOpportunities": ["[Opp]"]},
-  "feasibilityNotes": {"overallAssessment": "[Assessment]", "runtimeFeasibility": "[Feasibility]", "sceneCount": {"count": 8, "feasibility": "[Feasibility]"}, "locationComplexity": {"uniqueLocations": 3, "feasibility": "[Feasibility]"}, "castComplexity": "[Assessment]", "productionComplexity": "[Assessment]", "likelyResourcePressure": "[Pressure]", "scopeReductionAreas": ["[Area]"], "strengthAreas": ["[Area]"]},
+  "feasibilityNotes": {"overallAssessment": "[Assessment]", "runtimeFeasibility": "[Feasibility]", "sceneCount": {"count": 6, "feasibility": "[Feasibility]"}, "locationComplexity": {"uniqueLocations": 3, "feasibility": "[Feasibility]"}, "castComplexity": "[Assessment]", "productionComplexity": "[Assessment]", "likelyResourcePressure": "[Pressure]", "scopeReductionAreas": ["[Area]"], "strengthAreas": ["[Area]"]},
   "creativeRisksAndSafeguards": [{"riskDescription": "[Risk]", "whyItMatters": "[Why]", "affectedCreativeDNAElement": "[Element]", "likelihood": "medium", "potentialImpact": "[Impact]", "mitigationStrategy": "[Strategy]"}],
   "openCreativeQuestions": [{"unresolvedChoice": "[Choice]", "whyItMatters": "[Why]", "affectedElement": "scene", "availableOptions": ["[Option1]", "[Option2]"], "likelyTradeoffs": ["[Tradeoff]"], "fromPendingRecommendation": false, "resolutionTiming": "before-screenplay-drafting"}],
   "rejectedRecommendationRecord": [{"recommendationIdOrTitle": "[ID]", "proposedChange": "[Change]", "reasonExcluded": "[Reason]", "downstreamImpacts": ["[Impact]"]}],

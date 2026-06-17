@@ -1,15 +1,133 @@
+'use client';
+
 import { CreativeDNA } from '@/types';
+import { useState } from 'react';
 
 interface CreativeDNADisplayProps {
   creativeDNA: CreativeDNA;
 }
 
+interface CollapsibleSectionProps {
+  title: string;
+  summary: string;
+  isExpanded: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+  colorScheme: {
+    border: string;
+    bg: string;
+    text: string;
+    icon: string;
+  };
+}
+
+function CollapsibleSection({ 
+  title, 
+  summary, 
+  isExpanded, 
+  onToggle, 
+  children, 
+  colorScheme 
+}: CollapsibleSectionProps) {
+  return (
+    <div className={`border ${colorScheme.border} rounded-lg backdrop-blur-sm ${colorScheme.bg}`}>
+      <button
+        onClick={onToggle}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onToggle();
+          }
+        }}
+        className={`w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-${colorScheme.icon} focus:ring-offset-2 focus:ring-offset-gray-900 rounded-lg transition-all`}
+        aria-expanded={isExpanded}
+        aria-controls={`section-${title.replace(/\s+/g, '-').toLowerCase()}`}
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex-1">
+            <h2 className="text-2xl font-bold text-white mb-1">{title}</h2>
+            {!isExpanded && (
+              <p className={`text-sm ${colorScheme.text} opacity-80 line-clamp-1`}>
+                {summary}
+              </p>
+            )}
+          </div>
+          <svg
+            className={`w-6 h-6 ${colorScheme.text} transition-transform duration-200 flex-shrink-0 ml-4 ${
+              isExpanded ? 'transform rotate-180' : ''
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </button>
+      {isExpanded && (
+        <div 
+          id={`section-${title.replace(/\s+/g, '-').toLowerCase()}`}
+          className="px-6 pb-6"
+        >
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayProps) {
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    sourceWork: false,
+    coreElements: false,
+    thematicElements: false,
+    characterArchetypes: false,
+    narrativeStructure: false,
+    worldBuilding: false,
+    emotionalTone: false,
+    targetAudience: false,
+  });
+
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  // Generate summaries
+  const sourceWorkSummary = `${creativeDNA.sourceWork.title} by ${creativeDNA.sourceWork.creator} • ${creativeDNA.sourceWork.medium} • ${creativeDNA.sourceWork.genre.join(', ')}`;
+  
+  const coreElementsSummary = creativeDNA.coreElements.premise.substring(0, 100) + (creativeDNA.coreElements.premise.length > 100 ? '...' : '');
+  
+  const thematicElementsSummary = creativeDNA.thematicElements.primaryThemes.join(', ');
+  
+  const characterArchetypesSummary = `${creativeDNA.characterArchetypes.length} characters: ${creativeDNA.characterArchetypes.slice(0, 3).map(c => c.name).join(', ')}${creativeDNA.characterArchetypes.length > 3 ? '...' : ''}`;
+  
+  const narrativeStructureSummary = `${creativeDNA.narrativeStructure.structure} • ${creativeDNA.narrativeStructure.pacing} pacing • ${creativeDNA.narrativeStructure.pointOfView}`;
+  
+  const worldBuildingSummary = `${creativeDNA.worldBuilding.setting} • ${creativeDNA.worldBuilding.timeframe}`;
+  
+  const emotionalToneSummary = `${creativeDNA.emotionalTone.overallTone} • ${creativeDNA.emotionalTone.emotionalRange.slice(0, 3).join(', ')}`;
+  
+  const targetAudienceSummary = `${creativeDNA.targetAudience.ageRange} • ${creativeDNA.targetAudience.contentRating}`;
+
   return (
     <div className="space-y-6">
       {/* Source Work Info */}
-      <div className="border border-purple-500/30 rounded-lg p-6 backdrop-blur-sm bg-gradient-to-br from-purple-500/10 to-pink-500/10">
-        <h2 className="text-2xl font-bold text-white mb-4">Source Work</h2>
+      <CollapsibleSection
+        title="Source Work"
+        summary={sourceWorkSummary}
+        isExpanded={expandedSections.sourceWork}
+        onToggle={() => toggleSection('sourceWork')}
+        colorScheme={{
+          border: 'border-purple-500/30',
+          bg: 'bg-gradient-to-br from-purple-500/10 to-pink-500/10',
+          text: 'text-purple-300',
+          icon: 'purple-500'
+        }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <span className="text-purple-300 text-sm font-semibold">Title:</span>
@@ -34,11 +152,21 @@ export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayPr
             <p className="text-gray-300 mt-1">{creativeDNA.sourceWork.synopsis}</p>
           </div>
         )}
-      </div>
+      </CollapsibleSection>
 
       {/* Core Elements */}
-      <div className="border border-blue-500/30 rounded-lg p-6 backdrop-blur-sm bg-blue-500/5">
-        <h2 className="text-2xl font-bold text-white mb-4">Core Elements</h2>
+      <CollapsibleSection
+        title="Core Elements"
+        summary={coreElementsSummary}
+        isExpanded={expandedSections.coreElements}
+        onToggle={() => toggleSection('coreElements')}
+        colorScheme={{
+          border: 'border-blue-500/30',
+          bg: 'bg-blue-500/5',
+          text: 'text-blue-300',
+          icon: 'blue-500'
+        }}
+      >
         <div className="space-y-4">
           <div>
             <span className="text-blue-300 text-sm font-semibold">Premise:</span>
@@ -66,11 +194,21 @@ export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayPr
             </div>
           )}
         </div>
-      </div>
+      </CollapsibleSection>
 
       {/* Thematic Elements */}
-      <div className="border border-green-500/30 rounded-lg p-6 backdrop-blur-sm bg-green-500/5">
-        <h2 className="text-2xl font-bold text-white mb-4">Thematic Elements</h2>
+      <CollapsibleSection
+        title="Thematic Elements"
+        summary={thematicElementsSummary}
+        isExpanded={expandedSections.thematicElements}
+        onToggle={() => toggleSection('thematicElements')}
+        colorScheme={{
+          border: 'border-green-500/30',
+          bg: 'bg-green-500/5',
+          text: 'text-green-300',
+          icon: 'green-500'
+        }}
+      >
         <div className="space-y-4">
           <div>
             <span className="text-green-300 text-sm font-semibold">Primary Themes:</span>
@@ -111,11 +249,21 @@ export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayPr
             </div>
           )}
         </div>
-      </div>
+      </CollapsibleSection>
 
       {/* Character Archetypes */}
-      <div className="border border-yellow-500/30 rounded-lg p-6 backdrop-blur-sm bg-yellow-500/5">
-        <h2 className="text-2xl font-bold text-white mb-4">Character Archetypes</h2>
+      <CollapsibleSection
+        title="Character Archetypes"
+        summary={characterArchetypesSummary}
+        isExpanded={expandedSections.characterArchetypes}
+        onToggle={() => toggleSection('characterArchetypes')}
+        colorScheme={{
+          border: 'border-yellow-500/30',
+          bg: 'bg-yellow-500/5',
+          text: 'text-yellow-300',
+          icon: 'yellow-500'
+        }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {creativeDNA.characterArchetypes.map((char) => (
             <div key={char.id} className="bg-black/20 rounded-lg p-4">
@@ -141,11 +289,21 @@ export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayPr
             </div>
           ))}
         </div>
-      </div>
+      </CollapsibleSection>
 
       {/* Narrative Structure */}
-      <div className="border border-orange-500/30 rounded-lg p-6 backdrop-blur-sm bg-orange-500/5">
-        <h2 className="text-2xl font-bold text-white mb-4">Narrative Structure</h2>
+      <CollapsibleSection
+        title="Narrative Structure"
+        summary={narrativeStructureSummary}
+        isExpanded={expandedSections.narrativeStructure}
+        onToggle={() => toggleSection('narrativeStructure')}
+        colorScheme={{
+          border: 'border-orange-500/30',
+          bg: 'bg-orange-500/5',
+          text: 'text-orange-300',
+          icon: 'orange-500'
+        }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <span className="text-orange-300 text-sm font-semibold">Structure:</span>
@@ -182,11 +340,21 @@ export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayPr
             </div>
           </div>
         )}
-      </div>
+      </CollapsibleSection>
 
       {/* World Building */}
-      <div className="border border-cyan-500/30 rounded-lg p-6 backdrop-blur-sm bg-cyan-500/5">
-        <h2 className="text-2xl font-bold text-white mb-4">World Building</h2>
+      <CollapsibleSection
+        title="World Building"
+        summary={worldBuildingSummary}
+        isExpanded={expandedSections.worldBuilding}
+        onToggle={() => toggleSection('worldBuilding')}
+        colorScheme={{
+          border: 'border-cyan-500/30',
+          bg: 'bg-cyan-500/5',
+          text: 'text-cyan-300',
+          icon: 'cyan-500'
+        }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <span className="text-cyan-300 text-sm font-semibold">Setting:</span>
@@ -209,11 +377,21 @@ export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayPr
             </div>
           )}
         </div>
-      </div>
+      </CollapsibleSection>
 
       {/* Emotional Tone */}
-      <div className="border border-pink-500/30 rounded-lg p-6 backdrop-blur-sm bg-pink-500/5">
-        <h2 className="text-2xl font-bold text-white mb-4">Emotional Tone</h2>
+      <CollapsibleSection
+        title="Emotional Tone"
+        summary={emotionalToneSummary}
+        isExpanded={expandedSections.emotionalTone}
+        onToggle={() => toggleSection('emotionalTone')}
+        colorScheme={{
+          border: 'border-pink-500/30',
+          bg: 'bg-pink-500/5',
+          text: 'text-pink-300',
+          icon: 'pink-500'
+        }}
+      >
         <div className="space-y-4">
           <div>
             <span className="text-pink-300 text-sm font-semibold">Overall Tone:</span>
@@ -242,11 +420,21 @@ export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayPr
             </div>
           )}
         </div>
-      </div>
+      </CollapsibleSection>
 
       {/* Target Audience */}
-      <div className="border border-red-500/30 rounded-lg p-6 backdrop-blur-sm bg-red-500/5">
-        <h2 className="text-2xl font-bold text-white mb-4">Target Audience</h2>
+      <CollapsibleSection
+        title="Target Audience"
+        summary={targetAudienceSummary}
+        isExpanded={expandedSections.targetAudience}
+        onToggle={() => toggleSection('targetAudience')}
+        colorScheme={{
+          border: 'border-red-500/30',
+          bg: 'bg-red-500/5',
+          text: 'text-red-300',
+          icon: 'red-500'
+        }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <span className="text-red-300 text-sm font-semibold">Age Range:</span>
@@ -269,7 +457,7 @@ export default function CreativeDNADisplay({ creativeDNA }: CreativeDNADisplayPr
             </div>
           </div>
         )}
-      </div>
+      </CollapsibleSection>
     </div>
   );
 }

@@ -72,12 +72,24 @@ Given a Creative DNA profile and target medium specifications, generate adaptati
 - Change: internal monologue → visual behavior, backstory → implied, multiple POVs → limited
 - Preserve: iconic dialogue, essential plot points, unique tone, memorable moments
 
+## Critical: UUID and Type Requirements
+
+**All UUIDs must be valid v4 format:**
+- `id` (top-level): Unique identifier for this recommendation set
+- `recommendationId`: Unique identifier for each individual recommendation
+
+**overallStrategy.approach** must be exactly one of: "faithful", "interpretive", "loose", "reimagining", "inspired_by"
+
+**overallStrategy.targetAudienceAdjustments** must be a single string (not an array, not an object). Use empty string "" if no adjustments needed.
+
+**sourceEvidence.quotes** must be an array of strings, even when empty. Use `[]` if no quotes available.
+
 ## Recommendation Structure
 
 Each recommendation must include ALL required fields:
 
 ### recommendationId
-- Generate unique UUID v4 for each recommendation
+- Generate unique UUID v4 for each recommendation (must be valid UUID format)
 
 ### category
 - Choose from: structure, pacing, character, plot, theme, setting, tone, point_of_view, dialogue, opening, closing, subplot, relationship, conflict, world_building, other
@@ -136,7 +148,7 @@ Each recommendation must include ALL required fields:
 Return ONLY valid JSON matching the Adaptation Recommendations schema. No markdown, no explanations, no additional text.
 
 Required top-level fields:
-- id (UUID v4)
+- id (UUID v4 - must be valid UUID format)
 - version (semantic version, e.g., "1.0.0")
 - creativeDnaId (UUID from input Creative DNA)
 - sourceWork (object with title, medium)
@@ -146,6 +158,89 @@ Required top-level fields:
 - aiAnalysis (object with model, analysisDate, parameters)
 - createdAt (ISO 8601 timestamp)
 - updatedAt (ISO 8601 timestamp - same as createdAt for new)
+
+## Required Structure Example
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "version": "1.0.0",
+  "creativeDnaId": "650e8400-e29b-41d4-a716-446655440001",
+  "sourceWork": {
+    "title": "Story Title",
+    "medium": "short_story"
+  },
+  "targetMedium": {
+    "medium": "film",
+    "format": "short film",
+    "estimatedLength": {
+      "value": 15,
+      "unit": "minutes"
+    },
+    "platform": "festival"
+  },
+  "overallStrategy": {
+    "approach": "interpretive",
+    "corePreservation": ["Central conflict", "Character arc", "Core theme"],
+    "targetAudienceAdjustments": "Adjustments as single string, or empty string if none"
+  },
+  "recommendations": [
+    {
+      "recommendationId": "750e8400-e29b-41d4-a716-446655440002",
+      "category": "structure",
+      "title": "Compress Three-Act Structure",
+      "proposedChange": "Detailed description of change",
+      "sourceEvidence": {
+        "elements": ["Element 1", "Element 2"],
+        "context": "Context explanation",
+        "quotes": []
+      },
+      "reasoning": "Detailed reasoning",
+      "mediumPrinciple": {
+        "principle": "Runtime Constraints",
+        "explanation": "How principle applies"
+      },
+      "creativeBenefit": {
+        "primary": "Main benefit",
+        "secondary": ["Additional benefit 1", "Additional benefit 2"],
+        "audienceImpact": "Impact on audience"
+      },
+      "potentialRisk": {
+        "risks": ["Risk 1", "Risk 2"],
+        "severity": "medium",
+        "mitigation": "Mitigation strategy",
+        "tradeoffs": "What might be lost"
+      },
+      "confidence": {
+        "score": 0.85,
+        "factors": {
+          "sourceClarity": "clear",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": ["Uncertainty 1"]
+      },
+      "alternativeApproach": {
+        "approach": "Alternative description",
+        "comparison": "How it compares",
+        "whenToConsider": "When to use alternative"
+      },
+      "decisionStatus": "proposed",
+      "priority": "high"
+    }
+  ],
+  "aiAnalysis": {
+    "model": "IBM Granite 4.0 H Small",
+    "analysisDate": "2024-01-15T10:30:00Z",
+    "parameters": {
+      "temperature": 0.1,
+      "max_tokens": 4000
+    }
+  },
+  "createdAt": "2024-01-15T10:30:00Z",
+  "updatedAt": "2024-01-15T10:30:00Z"
+}
+```
 
 ## Recommendation Categories to Cover
 

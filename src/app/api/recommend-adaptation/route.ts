@@ -12,14 +12,20 @@ const ajv = new Ajv2020({
 });
 addFormats(ajv);
 
-// Load and compile Creative DNA schema
+// Load and compile schemas
 let validateCreativeDNA: any;
+let validateAdaptationRecommendation: any;
+
 try {
-  const schemaPath = join(process.cwd(), 'schemas', 'creative_dna.schema.json');
-  const schema = JSON.parse(readFileSync(schemaPath, 'utf-8'));
-  validateCreativeDNA = ajv.compile(schema);
+  const creativeDnaSchemaPath = join(process.cwd(), 'schemas', 'creative_dna.schema.json');
+  const creativeDnaSchema = JSON.parse(readFileSync(creativeDnaSchemaPath, 'utf-8'));
+  validateCreativeDNA = ajv.compile(creativeDnaSchema);
+
+  const adaptationSchemaPath = join(process.cwd(), 'schemas', 'adaptation_recommendation.schema.json');
+  const adaptationSchema = JSON.parse(readFileSync(adaptationSchemaPath, 'utf-8'));
+  validateAdaptationRecommendation = ajv.compile(adaptationSchema);
 } catch (error) {
-  console.error('Failed to load Creative DNA schema:', error);
+  console.error('Failed to load schemas:', error);
 }
 
 // Helper function to get IAM access token
@@ -81,13 +87,55 @@ export async function POST(request: Request) {
       );
     }
 
-    const { sourceText } = body;
+    const { creativeDNA, targetMedium } = body;
 
-    if (!sourceText || typeof sourceText !== 'string') {
+    // Validate Creative DNA input
+    if (!creativeDNA || typeof creativeDNA !== 'object') {
       return NextResponse.json(
         {
           success: false,
-          error: 'Missing or invalid sourceText in request body'
+          error: 'Missing or invalid creativeDNA in request body'
+        },
+        { status: 400 }
+      );
+    }
+
+    // Validate target medium
+    if (!targetMedium || typeof targetMedium !== 'object') {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Missing or invalid targetMedium in request body'
+        },
+        { status: 400 }
+      );
+    }
+
+    // Validate Creative DNA against schema
+    if (!validateCreativeDNA) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Schema validation unavailable',
+          details: 'Creative DNA schema failed to load'
+        },
+        { status: 500 }
+      );
+    }
+
+    const isValidCreativeDNA = validateCreativeDNA(creativeDNA);
+    if (!isValidCreativeDNA) {
+      const errors = validateCreativeDNA.errors?.map((err: any) => {
+        const path = err.instancePath || 'root';
+        const message = err.message || 'validation failed';
+        return `${path}: ${message}`;
+      }) || ['Unknown validation error'];
+
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Invalid Creative DNA format',
+          validationErrors: errors
         },
         { status: 400 }
       );
@@ -108,8 +156,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Read the Creative DNA system prompt
-    const promptPath = join(process.cwd(), 'prompts', 'creative-dna-system-prompt.md');
+    // Read the Adaptation Recommendation system prompt
+    const promptPath = join(process.cwd(), 'prompts', 'adaptation-recommendation-system-prompt.md');
     let systemPrompt: string;
     
     try {
@@ -145,6 +193,18 @@ export async function POST(request: Request) {
     const modelId = 'ibm/granite-4-h-small';
     const endpoint = `${watsonxUrl}/ml/v1/text/chat?version=2023-05-29`;
 
+    const userMessage = `## Creative DNA Profile
+
+${JSON.stringify(creativeDNA, null, 2)}
+
+## Target Medium
+
+${JSON.stringify(targetMedium, null, 2)}
+
+## Your Response
+
+Generate adaptation recommendations in valid JSON format matching the Adaptation Recommendations schema. No markdown, no explanations, no additional text.`;
+
     const requestBody = {
       model_id: modelId,
       project_id: projectId,
@@ -155,13 +215,7 @@ export async function POST(request: Request) {
         },
         {
           role: 'user',
-          content: `## Source Text to Analyze
-
-${sourceText}
-
-## Your Response
-
-Return ONLY valid JSON matching the Creative DNA schema. No markdown, no explanations, no additional text.`
+          content: userMessage
         }
       ],
       max_tokens: 4000,
@@ -272,9 +326,9 @@ Return ONLY valid JSON matching the Creative DNA schema. No markdown, no explana
     }
 
     // Parse the JSON response (with json_object format, should be clean JSON)
-    let creativeDNA: any;
+    let adaptationRecommendation: any;
     try {
-      creativeDNA = JSON.parse(generatedText);
+      adaptationRecommendation = JSON.parse(generatedText);
     } catch (error) {
       console.error('JSON parsing error:', error);
       console.error('Generated text:', generatedText.substring(0, 500));
@@ -283,164 +337,53 @@ Return ONLY valid JSON matching the Creative DNA schema. No markdown, no explana
         {
           success: false,
           error: 'Failed to parse AI response as JSON',
-          details: error instanceof Error ? error.message : 'Invalid JSON format',
-          preview: generatedText.substring(0, 200) + '...'
+          details: error instanceof Error ? error.message : 'Invalid JSON format'
         },
         { status: 500 }
       );
     }
 
-    // Normalize character roles before validation
-    if (creativeDNA.characterArchetypes && Array.isArray(creativeDNA.characterArchetypes)) {
-      creativeDNA.characterArchetypes.forEach((char: any) => {
-        if (char.role && typeof char.role === 'string') {
-          const role = char.role.toLowerCase();
-          
-          // Map common variations to allowed enum values
-          if (['posthumous_supporter', 'mentor', 'ally', 'deuteragonist'].includes(role)) {
-            char.role = 'supporting';
-          } else if (role === 'villain') {
-            char.role = 'antagonist';
-          } else if (['lead', 'main_character'].includes(role)) {
-            char.role = 'protagonist';
-          } else if (['background', 'cameo'].includes(role)) {
-            char.role = 'minor';
-          }
-          // Leave already-valid values unchanged
-        }
-      });
-    }
-
-    // Validate the Creative DNA against schema using Ajv
-    if (!validateCreativeDNA) {
+    // Validate the Adaptation Recommendation against schema using Ajv
+    if (!validateAdaptationRecommendation) {
       return NextResponse.json(
         {
           success: false,
           error: 'Schema validation unavailable',
-          details: 'Creative DNA schema failed to load'
+          details: 'Adaptation Recommendation schema failed to load'
         },
         { status: 500 }
       );
     }
 
-    const isValid = validateCreativeDNA(creativeDNA);
+    const isValid = validateAdaptationRecommendation(adaptationRecommendation);
     
     if (!isValid) {
-      const errors = validateCreativeDNA.errors?.map((err: any) => {
+      const errors = validateAdaptationRecommendation.errors?.map((err: any) => {
         const path = err.instancePath || 'root';
         const message = err.message || 'validation failed';
         return `${path}: ${message}`;
       }) || ['Unknown validation error'];
 
       console.error('Schema validation errors:', errors);
-      console.log('Attempting automatic correction...');
-
-      // Attempt automatic correction
-      try {
-        const correctionPrompt = `The following JSON failed schema validation. Fix ALL errors and return the complete corrected JSON only. No explanations, no markdown.
-
-INVALID JSON:
-${JSON.stringify(creativeDNA, null, 2)}
-
-VALIDATION ERRORS:
-${errors.join('\n')}
-
-Return the complete corrected JSON that passes validation.`;
-
-        const correctionRequestBody = {
-          model_id: modelId,
-          project_id: projectId,
-          messages: [
-            {
-              role: 'user',
-              content: correctionPrompt
-            }
-          ],
-          max_tokens: 4000,
-          temperature: 0.1,
-          top_p: 0.95,
-          repetition_penalty: 1.1,
-          response_format: {
-            type: 'json_object'
-          }
-        };
-
-        const correctionResponse = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(correctionRequestBody),
-        });
-
-        if (correctionResponse.ok) {
-          const correctionResponseText = await correctionResponse.text();
-          let correctionData: any;
-          
-          try {
-            correctionData = JSON.parse(correctionResponseText);
-          } catch (parseError) {
-            console.error('Failed to parse correction response');
-            throw new Error('Correction response parse failed');
-          }
-
-          const correctedText = correctionData.choices?.[0]?.message?.content?.trim();
-          
-          if (correctedText) {
-            let correctedCreativeDNA: any;
-            try {
-              correctedCreativeDNA = JSON.parse(correctedText);
-            } catch (parseError) {
-              console.error('Failed to parse corrected JSON');
-              throw new Error('Corrected JSON parse failed');
-            }
-
-            // Validate corrected result
-            const isCorrectedValid = validateCreativeDNA(correctedCreativeDNA);
-            
-            if (isCorrectedValid) {
-              console.log('✓ Automatic correction successful');
-              return NextResponse.json({
-                success: true,
-                data: correctedCreativeDNA,
-                corrected: true
-              });
-            } else {
-              const correctedErrors = validateCreativeDNA.errors?.map((err: any) => {
-                const path = err.instancePath || 'root';
-                const message = err.message || 'validation failed';
-                return `${path}: ${message}`;
-              }) || ['Unknown validation error'];
-              
-              console.error('Correction still has validation errors:', correctedErrors);
-            }
-          }
-        }
-      } catch (correctionError) {
-        console.error('Automatic correction failed:', correctionError);
-      }
-
-      // If correction failed or still invalid, return 422
+      
       return NextResponse.json(
         {
           success: false,
-          error: 'AI response does not match Creative DNA schema',
+          error: 'AI response does not match Adaptation Recommendation schema',
           validationErrors: errors
         },
         { status: 422 }
       );
     }
 
-    // Success - return the validated Creative DNA
+    // Success - return the validated Adaptation Recommendation
     return NextResponse.json({
       success: true,
-      data: creativeDNA
+      data: adaptationRecommendation
     });
 
   } catch (error) {
-    console.error('Unexpected error in Creative DNA analysis:', error);
+    console.error('Unexpected error in Adaptation Recommendation:', error);
     return NextResponse.json(
       {
         success: false,

@@ -1,0 +1,357 @@
+{
+  "id": "660e8400-e29b-41d4-a716-446655440003",
+  "version": "1.0.0",
+  "creativeDnaId": "550e8400-e29b-41d4-a716-446655440000",
+  "sourceWork": {
+    "title": "The Last Bloom",
+    "medium": "short_story"
+  },
+  "targetMedium": {
+    "medium": "film",
+    "format": "short film",
+    "estimatedLength": {
+      "value": 15,
+      "unit": "minutes"
+    },
+    "platform": "festival"
+  },
+  "overallStrategy": {
+    "approach": "interpretive",
+    "corePreservation": [
+      "Central conflict",
+      "Character arc",
+      "Core theme"
+    ],
+    "targetAudienceAdjustments": ""
+  },
+  "recommendations": [
+    {
+      "recommendationId": "760e8400-e29b-41d4-a716-446655440004",
+      "category": "opening",
+      "title": "Immediate Immersion",
+      "proposedChange": "Open with close-up of orchid bud against soft focus greenhouse background, then quick cut to Maya arriving at gate",
+      "sourceEvidence": {
+        "elements": [
+          "Unique Hook",
+          "Setting"
+        ],
+        "context": "Establishes magical realism premise while introducing protagonist",
+        "quotes": []
+      },
+      "reasoning": "Creates immediate intrigue by juxtaposing mysterious bloom with protagonist's arrival, addressing runtime constraint of fast-paced opening",
+      "mediumPrinciple": {
+        "principle": "Opening Image",
+        "explanation": "Sets tone and hooks audience within crucial first minute"
+      },
+      "creativeBenefit": {
+        "primary": "Grabs attention quickly",
+        "secondary": [
+          "Establishes central mystery",
+          "Sets visual style"
+        ],
+        "audienceImpact": "Creates curiosity and sets emotional tone"
+      },
+      "potentialRisk": {
+        "risks": [
+          "May confuse viewers unfamiliar with story",
+          "Requires careful execution to avoid confusion"
+        ],
+        "severity": "medium",
+        "mitigation": "Include subtle contextual clues like car keys or luggage",
+        "tradeoffs": "Sacrifices literal introduction for immediacy"
+      },
+      "confidence": {
+        "score": 0.85,
+        "factors": {
+          "sourceClarity": "clear",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": []
+      },
+      "alternativeApproach": {
+        "approach": "Traditional establishing shots followed by dialogue intro",
+        "comparison": "Less engaging but clearer for first-time viewers",
+        "whenToConsider": "If test audiences struggle with initial imagery"
+      },
+      "decisionStatus": "proposed",
+      "priority": "high"
+    },
+    {
+      "recommendationId": "770e8400-e29b-41d4-a716-446655440005",
+      "category": "character",
+      "title": "Show Don't Tell Backstory",
+      "proposedChange": "Replace internal monologue about past visits with visual montage of young Maya interacting with grandmother among plants",
+      "sourceEvidence": {
+        "elements": [
+          "Narrative Structure",
+          "Character Arc"
+        ],
+        "context": "Original contains extensive flashbacks revealing history",
+        "quotes": []
+      },
+      "reasoning": "Visual montage conveys necessary backstory efficiently, aligning with short film's need for concise storytelling",
+      "mediumPrinciple": {
+        "principle": "Scene Economy",
+        "explanation": "Merges multiple purposes into single effective scene"
+      },
+      "creativeBenefit": {
+        "primary": "Efficiently establishes character history",
+        "secondary": [
+          "Shows evolution over time",
+          "Maintains forward momentum"
+        ],
+        "audienceImpact": "Provides necessary context without slowing pace"
+      },
+      "potentialRisk": {
+        "risks": [
+          "Potential loss of emotional depth",
+          "Montage could feel rushed"
+        ],
+        "severity": "medium",
+        "mitigation": "Use evocative music and symbolic visuals",
+        "tradeoffs": "Some nuance sacrificed for brevity"
+      },
+      "confidence": {
+        "score": 0.78,
+        "factors": {
+          "sourceClarity": "moderate",
+          "mediumFit": "moderate",
+          "precedent": "established"
+        },
+        "uncertainties": [
+          "Effectiveness of montage in conveying emotion"
+        ]
+      },
+      "alternativeApproach": {
+        "approach": "Brief voiceover narration during key montages",
+        "comparison": "Adds clarity at cost of runtime",
+        "whenToConsider": "If early screenings indicate confusion"
+      },
+      "decisionStatus": "proposed",
+      "priority": "medium"
+    },
+    {
+      "recommendationId": "780e8400-e29b-41d4-a716-446655440006",
+      "category": "theme",
+      "title": "Externalize Central Theme",
+      "proposedChange": "Transform 'patience and care' concept into recurring motif of watering can filling and draining throughout greenhouse",
+      "sourceEvidence": {
+        "elements": [
+          "Key Symbols",
+          "Premise"
+        ],
+        "context": "Orchid blooming represents delayed gratification",
+        "quotes": []
+      },
+      "reasoning": "Physical manifestation of abstract theme makes it visually accessible and reinforces message throughout runtime",
+      "mediumPrinciple": {
+        "principle": "Visual Metaphor",
+        "explanation": "Uses tangible object to represent intangible concept"
+      },
+      "creativeBenefit": {
+        "primary": "Strengthens thematic resonance",
+        "secondary": [
+          "Creates visual continuity",
+          "Engages audience intellectually"
+        ],
+        "audienceImpact": "Makes theme tangible and memorable"
+      },
+      "potentialRisk": {
+        "risks": [
+          "Overuse could become repetitive",
+          "Symbolic meaning might be missed"
+        ],
+        "severity": "low",
+        "mitigation": "Vary interactions with watering cans subtly",
+        "tradeoffs": "Requires careful choreography"
+      },
+      "confidence": {
+        "score": 0.82,
+        "factors": {
+          "sourceClarity": "clear",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": []
+      },
+      "alternativeApproach": {
+        "approach": "Use natural light patterns changing over time",
+        "comparison": "More poetic but less direct",
+        "whenToConsider": "If floral motifs prove too obvious"
+      },
+      "decisionStatus": "proposed",
+      "priority": "high"
+    },
+    {
+      "recommendationId": "790e8400-e29b-41d4-a716-446655440007",
+      "category": "conflict",
+      "title": "Condense Protagonist's Journey",
+      "proposedChange": "Merge independent career crisis with emotional revelation about grandmother",
+      "sourceEvidence": {
+        "elements": [
+          "Central Conflict",
+          "Timeline Complexity"
+        ],
+        "context": "Current structure separates professional and personal conflicts",
+        "quotes": []
+      },
+      "reasoning": "Streamlines narrative to fit 15-minute format while maintaining core tension between independence and connection",
+      "mediumPrinciple": {
+        "principle": "Scene Economy",
+        "explanation": "Reduces number of distinct conflict points"
+      },
+      "creativeBenefit": {
+        "primary": "Focuses narrative energy",
+        "secondary": [
+          "Heightens emotional stakes",
+          "Clarifies character motivation"
+        ],
+        "audienceImpact": "Creates more intense emotional payoff"
+      },
+      "potentialRisk": {
+        "risks": [
+          "Loss of dimensionality in protagonist's character",
+          "May oversimplify complex issues"
+        ],
+        "severity": "medium",
+        "mitigation": "Ensure key moments of both conflicts remain visible",
+        "tradeoffs": "Nuanced portrayal sacrificed for clarity"
+      },
+      "confidence": {
+        "score": 0.75,
+        "factors": {
+          "sourceClarity": "moderate",
+          "mediumFit": "moderate",
+          "precedent": "emerging"
+        },
+        "uncertainties": [
+          "Audience acceptance of condensed conflict"
+        ]
+      },
+      "alternativeApproach": {
+        "approach": "Parallel editing between two timelines",
+        "comparison": "Preserves both conflicts separately",
+        "whenToConsider": "If single timeline feels rushed"
+      },
+      "decisionStatus": "proposed",
+      "priority": "medium"
+    },
+    {
+      "recommendationId": "7a0e8400-e29b-41d4-a716-446655440008",
+      "category": "closing",
+      "title": "Silent Epiphany",
+      "proposedChange": "End with Maya silently tending to the newly-bloomed orchid, camera pulling back to reveal full greenhouse",
+      "sourceEvidence": {
+        "elements": [
+          "Resolution",
+          "Symbolism"
+        ],
+        "context": "Final realization occurs internally after external events",
+        "quotes": []
+      },
+      "reasoning": "Silence emphasizes introspection and allows audience to interpret ending personally, fitting short film's intimate scale",
+      "mediumPrinciple": {
+        "principle": "Sound and Silence",
+        "explanation": "Utilizes lack of dialogue for emotional emphasis"
+      },
+      "creativeBenefit": {
+        "primary": "Leaves lasting impression",
+        "secondary": [
+          "Encourages viewer reflection",
+          "Highlights theme of nurturing"
+        ],
+        "audienceImpact": "Creates poignant conclusion open to interpretation"
+      },
+      "potentialRisk": {
+        "risks": [
+          "Ambiguity might frustrate some viewers",
+          "Lacks explicit resolution"
+        ],
+        "severity": "low",
+        "mitigation": "Ensure preceding actions clearly demonstrate change",
+        "tradeoffs": "Potentially reduces universal understanding"
+      },
+      "confidence": {
+        "score": 0.88,
+        "factors": {
+          "sourceClarity": "clear",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": []
+      },
+      "alternativeApproach": {
+        "approach": "Add brief voiceover summarizing Maya's thoughts",
+        "comparison": "Provides closure at expense of ambiguity",
+        "whenToConsider": "If test audiences express confusion"
+      },
+      "decisionStatus": "proposed",
+      "priority": "high"
+    },
+    {
+      "recommendationId": "7b0e8400-e29b-41d4-a716-446655440009",
+      "category": "dialogue",
+      "title": "Minimize Expository Dialogue",
+      "proposedChange": "Cut lines explicitly stating emotions; replace with facial expressions and actions",
+      "sourceEvidence": {
+        "elements": [
+          "Dialogue Density",
+          "Character Arc"
+        ],
+        "context": "Script contains many lines spelling out feelings directly",
+        "quotes": []
+      },
+      "reasoning": "Short films rely heavily on visual communication; implicit expression maintains engagement within tight timeframe",
+      "mediumPrinciple": {
+        "principle": "Dialogue Density",
+        "explanation": "Reduces spoken word count significantly"
+      },
+      "creativeBenefit": {
+        "primary": "Enhances authenticity",
+        "secondary": [
+          "Allows actors to convey subtleties",
+          "Keeps pacing brisk"
+        ],
+        "audienceImpact": "Creates more realistic, immersive experience"
+      },
+      "potentialRisk": {
+        "risks": [
+          "Risk of unclear motivations",
+          "Potential loss of important information"
+        ],
+        "severity": "medium",
+        "mitigation": "Ensure critical info conveyed visually elsewhere",
+        "tradeoffs": "Some narrative efficiency gained at risk of subtlety"
+      },
+      "confidence": {
+        "score": 0.81,
+        "factors": {
+          "sourceClarity": "moderate",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": [
+          "Actor ability to convey complex emotions non-verbally"
+        ]
+      },
+      "alternativeApproach": {
+        "approach": "Retain select key lines verbatim",
+        "comparison": "Balances clarity with concision",
+        "whenToConsider": "If certain plot points seem unclear otherwise"
+      },
+      "decisionStatus": "proposed",
+      "priority": "medium"
+    }
+  ],
+  "aiAnalysis": {
+    "model": "IBM Granite 4.0 H Small",
+    "analysisDate": "2024-01-15T10:30:00Z",
+    "parameters": {
+      "temperature": 0.1,
+      "max_tokens": 4000
+    }
+  },
+  "createdAt": "2024-01-15T10:30:00Z",
+  "updatedAt": "2024-01-15T10:30:00Z"
+}

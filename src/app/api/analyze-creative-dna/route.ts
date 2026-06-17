@@ -209,14 +209,17 @@ Return ONLY valid JSON matching the Creative DNA schema. No markdown, no explana
     try {
       data = JSON.parse(responseText);
     } catch (error) {
+      // Log server-side for debugging (safe preview, no credentials)
       console.error('Failed to parse watsonx.ai response:');
       console.error('HTTP Status:', response.status);
-      console.error('Response preview:', responseText.substring(0, 500));
+      console.error('Parse Error:', error instanceof Error ? error.message : 'Unknown');
+      console.error('Response preview (first 300 chars):', responseText.substring(0, 300));
       
+      // Return concise error to client
       return NextResponse.json(
         {
           success: false,
-          error: 'Invalid response from AI service'
+          error: 'AI service returned invalid response format'
         },
         { status: 502 }
       );

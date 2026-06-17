@@ -68,6 +68,12 @@ async function getIAMToken(apiKey: string): Promise<string> {
   return tokenData.access_token;
 }
 
+// Helper function to check if a string is a valid UUID
+function isValidUUID(str: string): boolean {
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  return typeof str === 'string' && uuidRegex.test(str);
+}
+
 export async function POST(request: Request) {
   try {
     // Read and parse request body with error handling
@@ -341,6 +347,23 @@ Generate adaptation recommendations in valid JSON format matching the Adaptation
         },
         { status: 500 }
       );
+    }
+
+    // Normalize UUIDs before validation
+    // Ensure top-level id is a valid UUID
+    if (!adaptationRecommendation.id || !isValidUUID(adaptationRecommendation.id)) {
+      adaptationRecommendation.id = crypto.randomUUID();
+      console.log('Generated top-level id:', adaptationRecommendation.id);
+    }
+
+    // Ensure each recommendation has a valid UUID for recommendationId
+    if (adaptationRecommendation.recommendations && Array.isArray(adaptationRecommendation.recommendations)) {
+      adaptationRecommendation.recommendations.forEach((rec: any, index: number) => {
+        if (!rec.recommendationId || !isValidUUID(rec.recommendationId)) {
+          rec.recommendationId = crypto.randomUUID();
+          console.log(`Generated recommendationId for recommendation ${index}:`, rec.recommendationId);
+        }
+      });
     }
 
     // Validate the Adaptation Recommendation against schema using Ajv

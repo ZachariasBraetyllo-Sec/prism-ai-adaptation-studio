@@ -1,0 +1,1165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prism-ai.example.com/schemas/production_blueprint.schema.json",
+  "title": "Production Blueprint Schema",
+  "description": "Structured schema for a short-film production blueprint derived from Creative DNA, target-medium settings, and accepted adaptation recommendations. Requires JSON Schema Draft 2020-12.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "blueprintId",
+    "sourceTitle",
+    "createdAt",
+    "targetMedium",
+    "targetDuration",
+    "decisionSummary",
+    "adaptationDirection",
+    "sceneRoadmap",
+    "characterPriorities",
+    "visualLanguage",
+    "sonicLanguage",
+    "pacingPlan",
+    "productionConsiderations",
+    "feasibilityNotes",
+    "creativeRisksAndSafeguards",
+    "openCreativeQuestions",
+    "finalCreativeHandoff"
+  ],
+  "properties": {
+    "blueprintId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this production blueprint (UUID v4 format)"
+    },
+    "sourceTitle": {
+      "type": "string",
+      "description": "Title of the source material being adapted"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the blueprint was created"
+    },
+    "targetMedium": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "platform", "duration"],
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": [
+            "short-film",
+            "short-series",
+            "web-series",
+            "social-media",
+            "experimental",
+            "interactive",
+            "other"
+          ],
+          "description": "Format category of the adaptation"
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "theatrical",
+            "streaming",
+            "broadcast",
+            "festival",
+            "online",
+            "social-media",
+            "art-installation",
+            "other"
+          ],
+          "description": "Intended platform for distribution or exhibition"
+        },
+        "duration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minimumSeconds", "maximumSeconds"],
+          "properties": {
+            "minimumSeconds": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Minimum target runtime in seconds"
+            },
+            "maximumSeconds": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Maximum target runtime in seconds"
+            }
+          }
+        },
+        "additionalContext": {
+          "type": "string",
+          "description": "Any additional context about the target medium"
+        }
+      }
+    },
+    "targetDuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimumMinutes", "maximumMinutes"],
+      "properties": {
+        "minimumMinutes": {
+          "type": "number",
+          "minimum": 0.1,
+          "description": "Minimum target duration in minutes"
+        },
+        "maximumMinutes": {
+          "type": "number",
+          "minimum": 0.1,
+          "description": "Maximum target duration in minutes"
+        }
+      }
+    },
+    "decisionSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "totalRecommendationsReviewed",
+        "acceptedCount",
+        "rejectedCount",
+        "pendingCount",
+        "unresolvedCreativeDecisions",
+        "intendedAudience"
+      ],
+      "properties": {
+        "totalRecommendationsReviewed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of recommendations presented to the creator"
+        },
+        "acceptedCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of recommendations accepted and incorporated"
+        },
+        "rejectedCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of recommendations rejected by the creator"
+        },
+        "pendingCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of recommendations still pending creator decision"
+        },
+        "unresolvedCreativeDecisions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "High-level categories of unresolved creative decisions"
+        },
+        "intendedAudience": {
+          "type": "string",
+          "description": "Target audience description for the adaptation"
+        }
+      }
+    },
+    "adaptationDirection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approach",
+        "centralEmotionalPromise",
+        "corePremiseToPreserve",
+        "primaryThemesToProtect",
+        "intendedAudienceExperience",
+        "majorAdaptationPriorities",
+        "majorCreativeBoundaries"
+      ],
+      "properties": {
+        "approach": {
+          "type": "string",
+          "description": "Overall adaptation strategy and methodology"
+        },
+        "centralEmotionalPromise": {
+          "type": "string",
+          "description": "The emotional core of the source material that must be preserved"
+        },
+        "corePremiseToPreserve": {
+          "type": "string",
+          "description": "The fundamental premise that defines the story"
+        },
+        "primaryThemesToProtect": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Core themes that must remain intact in the adaptation"
+        },
+        "intendedAudienceExperience": {
+          "type": "string",
+          "description": "What the audience should feel, understand, or experience"
+        },
+        "majorAdaptationPriorities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key priorities that shaped adaptation decisions"
+        },
+        "majorCreativeBoundaries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Creative limits or constraints that must be respected"
+        }
+      }
+    },
+    "sceneRoadmap": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 10,
+      "description": "Proposed sequence of 6 to 10 scenes for the short film",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sceneNumber",
+          "workingTitle",
+          "narrativePurpose",
+          "keyCharacters",
+          "setting",
+          "estimatedDurationSeconds",
+          "majorEmotionalBeat",
+          "essentialStoryInformation",
+          "acceptedRecommendationIds",
+          "creativeDNAElements",
+          "sourceEvidence",
+          "adaptationPrinciple"
+        ],
+        "properties": {
+          "sceneNumber": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Sequential scene number in the proposed film structure"
+          },
+          "workingTitle": {
+            "type": "string",
+            "description": "Short descriptive label for planning purposes"
+          },
+          "narrativePurpose": {
+            "type": "string",
+            "enum": [
+              "establish-protagonist",
+              "introduce-central-conflict",
+              "reveal-key-relationship",
+              "create-midpoint-shift",
+              "intensify-emotional-pressure",
+              "resolve-central-question",
+              "establish-setting",
+              "reveal-stakes",
+              "create-turning-point",
+              "escalate-tension",
+              "establish-theme",
+              "other"
+            ],
+            "description": "Narrative function of the scene"
+          },
+          "keyCharacters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Characters who appear or meaningfully influence the scene"
+          },
+          "setting": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["primaryLocation", "timeContext"],
+            "properties": {
+              "primaryLocation": {
+                "type": "string",
+                "description": "Primary location or environment"
+              },
+              "timeContext": {
+                "type": "string",
+                "description": "Time period, time of day, or temporal context"
+              }
+            }
+          },
+          "estimatedDurationSeconds": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Approximate runtime of the scene in seconds"
+          },
+          "majorEmotionalBeat": {
+            "type": "string",
+            "description": "Main emotional movement or audience response created by the scene"
+          },
+          "essentialStoryInformation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Key plot points or information that must be communicated in this scene"
+          },
+          "acceptedRecommendationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "UUIDs of accepted recommendations that shaped this scene"
+          },
+          "creativeDNAElements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["element", "preservation"],
+              "properties": {
+                "element": {
+                  "type": "string",
+                  "enum": [
+                    "premise",
+                    "central-conflict",
+                    "character-arc",
+                    "primary-theme",
+                    "emotional-tone",
+                    "key-symbol",
+                    "narrative-turning-point",
+                    "relationship-dynamic",
+                    "motivation",
+                    "worldview",
+                    "other"
+                  ]
+                },
+                "preservation": {
+                  "type": "string",
+                  "description": "How this element is preserved or developed in the scene"
+                }
+              }
+            },
+            "description": "Creative DNA elements being preserved or developed in this scene"
+          },
+          "sourceEvidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["source", "context"],
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "description": "Reference to source material (book chapter, film timestamp, etc.)"
+                },
+                "context": {
+                  "type": "string",
+                  "description": "How this source material informs the scene"
+                }
+              }
+            },
+            "description": "Source material evidence for the scene's design"
+          },
+          "adaptationPrinciple": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Adaptation principle(s) applied to this scene (e.g., compression, reconceptualization, emphasis)"
+          },
+          "visualOrSonicOpportunity": {
+            "type": "string",
+            "description": "Brief note on visual, sound, music, or symbolic opportunity"
+          },
+          "productionNote": {
+            "type": "string",
+            "description": "Practical consideration related to staging, location, cast, props, effects, or complexity"
+          }
+        }
+      }
+    },
+    "characterPriorities": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Guidance for each major character",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "characterName",
+          "dramaticFunction",
+          "essentialArc",
+          "keyRelationship",
+          "essentialTraits",
+          "adaptationFocus",
+          "whatMustNotBeLost",
+          "acceptedRecommendationIds",
+          "creativeDNAProtected"
+        ],
+        "properties": {
+          "characterName": {
+            "type": "string",
+            "description": "Name or identifier of the character"
+          },
+          "dramaticFunction": {
+            "type": "string",
+            "description": "Character's purpose within the short-film adaptation"
+          },
+          "essentialArc": {
+            "type": "string",
+            "description": "Emotional or narrative change that must remain intact"
+          },
+          "keyRelationship": {
+            "type": "string",
+            "description": "Relationship most important to the character's role"
+          },
+          "essentialTraits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Qualities that must remain recognizable"
+          },
+          "adaptationFocus": {
+            "type": "string",
+            "description": "What should be emphasized, condensed, combined, or clarified for short format"
+          },
+          "whatMustNotBeLost": {
+            "type": "string",
+            "description": "Most important character element to preserve"
+          },
+          "acceptedRecommendationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "UUIDs of recommendations that influenced the character plan"
+          },
+          "creativeDNAProtected": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["element", "function"],
+              "properties": {
+                "element": {
+                  "type": "string",
+                  "enum": [
+                    "archetype",
+                    "arc",
+                    "relationship",
+                    "theme",
+                    "conflict",
+                    "emotional-function",
+                    "motivation",
+                    "other"
+                  ]
+                },
+                "function": {
+                  "type": "string",
+                  "description": "How this element functions in the adaptation"
+                }
+              }
+            },
+            "description": "Related archetype, arc, relationship, theme, conflict, or emotional function"
+          }
+        }
+      }
+    },
+    "visualLanguage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overallApproach", "visualMotifs", "symbolicImagery", "colorPalette"],
+      "properties": {
+        "overallApproach": {
+          "type": "string",
+          "description": "Overall visual strategy and aesthetic direction"
+        },
+        "visualMotifs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["motif", "creativeDNAConnection"],
+            "properties": {
+              "motif": {
+                "type": "string",
+                "description": "Recurring visual motif or pattern"
+              },
+              "creativeDNAConnection": {
+                "type": "string",
+                "description": "How this motif supports a Creative DNA element"
+              }
+            }
+          },
+          "description": "Recurring visual motifs and their purpose"
+        },
+        "symbolicImagery": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["symbol", "meaning"],
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "description": "Symbolic image or object"
+              },
+              "meaning": {
+                "type": "string",
+                "description": "Thematic or emotional meaning"
+              }
+            }
+          },
+          "description": "Symbolic imagery and visual meanings"
+        },
+        "colorPalette": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["description"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Color palette guidance and mood intention"
+            },
+            "primaryColors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Primary color palette"
+            },
+            "secondaryColors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Secondary or accent colors"
+            },
+            "mood": {
+              "type": "string",
+              "description": "Overall mood or emotional tone created by colors"
+            }
+          }
+        },
+        "lightingDirection": {
+          "type": "string",
+          "description": "Lighting approach and philosophy"
+        },
+        "framingAndComposition": {
+          "type": "string",
+          "description": "Framing tendencies and composition philosophy"
+        },
+        "cameraMovement": {
+          "type": "string",
+          "description": "Camera movement philosophy and typical movements"
+        },
+        "environmentalStorytelling": {
+          "type": "string",
+          "description": "How the environment tells story through visual design"
+        },
+        "meaningfulObjects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["object", "narrative_significance"],
+            "properties": {
+              "object": {
+                "type": "string",
+                "description": "Object or prop"
+              },
+              "narrative_significance": {
+                "type": "string",
+                "description": "Why this object matters to the story"
+              }
+            }
+          },
+          "description": "Meaningful objects, props, and their narrative significance"
+        },
+        "visualContrasts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key visual contrasts that reinforce themes or emotional beats"
+        },
+        "transitionsAndEchoes": {
+          "type": "string",
+          "description": "Transitions and visual echoes between scenes"
+        }
+      }
+    },
+    "sonicLanguage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overallApproach",
+        "musicDirection",
+        "ambientSoundStrategy",
+        "dialogueDensity"
+      ],
+      "properties": {
+        "overallApproach": {
+          "type": "string",
+          "description": "Overall sound design philosophy"
+        },
+        "musicDirection": {
+          "type": "string",
+          "description": "Music approach, genre considerations, emotional intent"
+        },
+        "recurringMusicMotifs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["motif", "purpose"],
+            "properties": {
+              "motif": {
+                "type": "string",
+                "description": "Description of musical motif"
+              },
+              "purpose": {
+                "type": "string",
+                "description": "Thematic or emotional purpose"
+              }
+            }
+          },
+          "description": "Recurring musical motifs or themes"
+        },
+        "ambientSoundStrategy": {
+          "type": "string",
+          "description": "Strategy for ambient, environmental, or background sounds"
+        },
+        "recurringSoundMotifs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sound", "meaning"],
+            "properties": {
+              "sound": {
+                "type": "string",
+                "description": "Description of recurring sound"
+              },
+              "meaning": {
+                "type": "string",
+                "description": "Symbolic or emotional meaning"
+              }
+            }
+          },
+          "description": "Recurring sound design motifs"
+        },
+        "silenceAndRestraint": {
+          "type": "string",
+          "description": "Strategic use of silence or minimal sound"
+        },
+        "dialogueDensity": {
+          "type": "string",
+          "enum": [
+            "dialogue-heavy",
+            "dialogue-moderate",
+            "dialogue-light",
+            "mostly-silent",
+            "varied"
+          ],
+          "description": "Approach to dialogue presence and density"
+        },
+        "offScreenSoundOpportunities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Opportunities for meaningful off-screen sound"
+        },
+        "emotionalSoundTransitions": {
+          "type": "string",
+          "description": "How sound design supports emotional transitions between scenes"
+        },
+        "symbolicAudioElements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["element", "symbolism"],
+            "properties": {
+              "element": {
+                "type": "string",
+                "description": "Audio element or sound"
+              },
+              "symbolism": {
+                "type": "string",
+                "description": "What this audio represents or symbolizes"
+              }
+            }
+          },
+          "description": "Symbolic or meaningful audio elements"
+        }
+      }
+    },
+    "pacingPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "openingPace",
+        "earlyDevelopment",
+        "midpointShift",
+        "escalation",
+        "climaxTiming",
+        "resolution",
+        "endingRhythm",
+        "runtimeAllocation"
+      ],
+      "properties": {
+        "openingPace": {
+          "type": "string",
+          "description": "How quickly audience enters the story and what must be established"
+        },
+        "earlyDevelopment": {
+          "type": "string",
+          "description": "How central relationship, conflict, or mystery gains momentum"
+        },
+        "midpointShift": {
+          "type": "string",
+          "description": "Event or realization that changes direction or emotional pressure"
+        },
+        "escalation": {
+          "type": "string",
+          "description": "How tension, stakes, or emotional urgency increase"
+        },
+        "climaxTiming": {
+          "type": "string",
+          "description": "Where the central confrontation or emotional peak should occur"
+        },
+        "resolution": {
+          "type": "string",
+          "description": "How much time should remain after the climax"
+        },
+        "endingRhythm": {
+          "type": "string",
+          "description": "Emotional tempo and degree of closure in final moments"
+        },
+        "runtimeAllocation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "openingMinutes": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Estimated minutes for opening section"
+            },
+            "developmentMinutes": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Estimated minutes for development section"
+            },
+            "midpointMinutes": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Estimated minutes for midpoint shift"
+            },
+            "escalationMinutes": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Estimated minutes for escalation section"
+            },
+            "climaxMinutes": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Estimated minutes for climax"
+            },
+            "resolutionMinutes": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Estimated minutes for resolution"
+            }
+          },
+          "description": "Rough distribution of minutes across major structural sections"
+        }
+      }
+    },
+    "productionConsiderations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "essentialNeeds"],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "High-level overview of production scope and complexity"
+        },
+        "essentialNeeds": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["need", "category"],
+            "properties": {
+              "need": {
+                "type": "string",
+                "description": "Description of a production requirement"
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "location",
+                  "cast",
+                  "props",
+                  "wardrobe",
+                  "lighting",
+                  "sound",
+                  "visual-effects",
+                  "special-effects",
+                  "blocking",
+                  "weather",
+                  "continuity",
+                  "accessibility",
+                  "other"
+                ]
+              },
+              "priority": {
+                "type": "string",
+                "enum": ["essential", "important", "optional"],
+                "description": "Whether this is essential, important, or optional"
+              }
+            }
+          },
+          "description": "Practical production needs and requirements"
+        },
+        "locationRequirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Likely location types needed"
+        },
+        "castComplexity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "speakingRoles": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of speaking roles"
+            },
+            "backgroundCastNeeds": {
+              "type": "string",
+              "description": "Background cast requirements"
+            }
+          }
+        },
+        "technicalConsiderations": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "complexBlocking": {
+              "type": "boolean",
+              "description": "Whether complex blocking is required"
+            },
+            "nightOrExteriorShooting": {
+              "type": "boolean",
+              "description": "Whether night or exterior shooting is needed"
+            },
+            "weatherDependent": {
+              "type": "boolean",
+              "description": "Whether production depends on specific weather"
+            },
+            "continuityConcerns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Notable continuity considerations"
+            }
+          }
+        },
+        "highCostElements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Elements likely to require significant resources or budget"
+        },
+        "simplificationOpportunities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Areas where scope can be reduced without harming the story"
+        }
+      }
+    },
+    "feasibilityNotes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overallAssessment"],
+      "properties": {
+        "overallAssessment": {
+          "type": "string",
+          "description": "Overall feasibility assessment for the selected format and duration"
+        },
+        "runtimeFeasibility": {
+          "type": "string",
+          "description": "Assessment of whether the story fits the target runtime"
+        },
+        "sceneCount": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of scenes in the roadmap"
+            },
+            "feasibility": {
+              "type": "string",
+              "description": "Whether this number of scenes is feasible"
+            }
+          }
+        },
+        "locationComplexity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "uniqueLocations": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of unique locations needed"
+            },
+            "feasibility": {
+              "type": "string",
+              "description": "Assessment of location requirements"
+            }
+          }
+        },
+        "castComplexity": {
+          "type": "string",
+          "description": "Assessment of cast and character requirements"
+        },
+        "productionComplexity": {
+          "type": "string",
+          "description": "Overall assessment of production complexity"
+        },
+        "likelyResourcePressure": {
+          "type": "string",
+          "description": "Where the largest resource pressure is likely to occur"
+        },
+        "scopeReductionAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Areas where scope should be reduced if resources are constrained"
+        },
+        "strengthAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Areas where the concept remains especially strong and practical"
+        }
+      }
+    },
+    "creativeRisksAndSafeguards": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Important creative risks and mitigation strategies",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "riskDescription",
+          "affectedCreativeDNAElement",
+          "likelihood",
+          "potentialImpact",
+          "mitigationStrategy"
+        ],
+        "properties": {
+          "riskDescription": {
+            "type": "string",
+            "description": "Description of the creative risk"
+          },
+          "whyItMatters": {
+            "type": "string",
+            "description": "Why this risk is significant to the adaptation"
+          },
+          "affectedCreativeDNAElement": {
+            "type": "string",
+            "description": "Which Creative DNA element could be compromised"
+          },
+          "likelihood": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "How likely is this risk to occur"
+          },
+          "potentialImpact": {
+            "type": "string",
+            "description": "What the impact would be if the risk occurs"
+          },
+          "mitigationStrategy": {
+            "type": "string",
+            "description": "How to prevent or mitigate this risk"
+          },
+          "acceptedRecommendationId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional: UUID of recommendation that relates to this safeguard"
+          }
+        }
+      }
+    },
+    "openCreativeQuestions": {
+      "type": "array",
+      "minItems": 0,
+      "description": "Unresolved creative decisions requiring human judgment",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "unresolvedChoice",
+          "affectedElement",
+          "availableOptions",
+          "resolutionTiming"
+        ],
+        "properties": {
+          "unresolvedChoice": {
+            "type": "string",
+            "description": "The decision that still requires human judgment"
+          },
+          "whyItMatters": {
+            "type": "string",
+            "description": "Why this decision is important"
+          },
+          "affectedElement": {
+            "type": "string",
+            "enum": [
+              "scene",
+              "character",
+              "theme",
+              "production",
+              "visual-approach",
+              "sonic-approach",
+              "structure",
+              "tone",
+              "other"
+            ],
+            "description": "What part of the blueprint is affected"
+          },
+          "availableOptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Possible directions for this decision"
+          },
+          "likelyTradeoffs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Trade-offs between the available options"
+          },
+          "fromPendingRecommendation": {
+            "type": "boolean",
+            "description": "Whether this comes from a pending recommendation"
+          },
+          "resolutionTiming": {
+            "type": "string",
+            "enum": [
+              "before-screenplay-drafting",
+              "before-production",
+              "during-production",
+              "flexible"
+            ],
+            "description": "When this decision should ideally be resolved"
+          }
+        }
+      }
+    },
+    "rejectedRecommendationRecord": {
+      "type": "array",
+      "minItems": 0,
+      "description": "Record of recommendations the creator rejected",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recommendationIdOrTitle",
+          "proposedChange",
+          "reasonExcluded"
+        ],
+        "properties": {
+          "recommendationIdOrTitle": {
+            "type": "string",
+            "description": "ID or title of the rejected recommendation"
+          },
+          "proposedChange": {
+            "type": "string",
+            "description": "What the recommendation proposed"
+          },
+          "reasonExcluded": {
+            "type": "string",
+            "description": "Why the creator excluded it from the blueprint"
+          },
+          "downstreamImpacts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Any downstream sections affected by this rejection"
+          }
+        }
+      }
+    },
+    "finalCreativeHandoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adaptationCentralDirection",
+        "mostImportantPreservedElements",
+        "strongestAcceptedDecisions",
+        "largestRemainingChallenge",
+        "nextRecommendedAction"
+      ],
+      "properties": {
+        "adaptationCentralDirection": {
+          "type": "string",
+          "description": "Concise summary of the adaptation's central direction"
+        },
+        "mostImportantPreservedElements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key elements being preserved from the source"
+        },
+        "strongestAcceptedDecisions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The strongest creative decisions made in the blueprint"
+        },
+        "largestRemainingChallenge": {
+          "type": "string",
+          "description": "The largest challenge still facing the adaptation"
+        },
+        "nextRecommendedAction": {
+          "type": "string",
+          "enum": [
+            "outline-drafting",
+            "screenplay-drafting",
+            "visual-reference-gathering",
+            "budget-review",
+            "location-scouting",
+            "casting-discussion",
+            "directors-treatment",
+            "production-consultation",
+            "creative-team-alignment",
+            "other"
+          ],
+          "description": "Next concrete creative action"
+        },
+        "additionalGuidance": {
+          "type": "string",
+          "description": "Any additional guidance for moving forward"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,405 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prism-ai-adaptation-studio.com/schemas/creative_dna.schema.json",
+  "title": "Creative DNA",
+  "description": "A comprehensive representation of a creative work's core elements, themes, and characteristics that define its essence across different media formats.",
+  "type": "object",
+  "required": ["id", "version", "sourceWork", "coreElements", "narrativeStructure", "thematicElements", "characterArchetypes", "worldBuilding", "emotionalTone", "targetAudience", "createdAt", "updatedAt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this Creative DNA profile"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of this Creative DNA schema (e.g., '1.0.0')"
+    },
+    "sourceWork": {
+      "type": "object",
+      "description": "Information about the original creative work",
+      "required": ["title", "medium", "genre", "creator"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the source work"
+        },
+        "medium": {
+          "type": "string",
+          "enum": ["novel", "short_story", "screenplay", "stage_play", "comic", "graphic_novel", "video_game", "podcast", "film", "tv_series", "other"],
+          "description": "Original medium of the work"
+        },
+        "genre": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Primary and secondary genres"
+        },
+        "creator": {
+          "type": "string",
+          "description": "Original creator or author"
+        },
+        "publicationYear": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 9999,
+          "description": "Year of original publication or release"
+        },
+        "synopsis": {
+          "type": "string",
+          "description": "Brief synopsis of the source work"
+        }
+      }
+    },
+    "coreElements": {
+      "type": "object",
+      "description": "Essential elements that define the work's identity",
+      "required": ["premise", "centralConflict", "uniqueHook"],
+      "properties": {
+        "premise": {
+          "type": "string",
+          "description": "The fundamental premise or concept of the work"
+        },
+        "centralConflict": {
+          "type": "string",
+          "description": "The primary conflict driving the narrative"
+        },
+        "uniqueHook": {
+          "type": "string",
+          "description": "What makes this work distinctive or memorable"
+        },
+        "keySymbols": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["symbol", "meaning"],
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "description": "The symbolic element"
+              },
+              "meaning": {
+                "type": "string",
+                "description": "What the symbol represents"
+              }
+            }
+          },
+          "description": "Important symbols and their meanings"
+        }
+      }
+    },
+    "narrativeStructure": {
+      "type": "object",
+      "description": "How the story is structured and told",
+      "required": ["structure", "pacing", "pointOfView"],
+      "properties": {
+        "structure": {
+          "type": "string",
+          "enum": ["three_act", "five_act", "hero_journey", "circular", "episodic", "non_linear", "frame_narrative", "other"],
+          "description": "Overall narrative structure type"
+        },
+        "pacing": {
+          "type": "string",
+          "enum": ["fast", "moderate", "slow", "variable"],
+          "description": "Overall pacing of the narrative"
+        },
+        "pointOfView": {
+          "type": "string",
+          "enum": ["first_person", "second_person", "third_person_limited", "third_person_omniscient", "multiple", "other"],
+          "description": "Narrative perspective"
+        },
+        "timelineComplexity": {
+          "type": "string",
+          "enum": ["linear", "flashbacks", "flash_forwards", "non_linear", "parallel_timelines"],
+          "description": "How time is handled in the narrative"
+        },
+        "plotPoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "description", "importance"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the plot point"
+              },
+              "description": {
+                "type": "string",
+                "description": "What happens at this plot point"
+              },
+              "importance": {
+                "type": "string",
+                "enum": ["critical", "major", "supporting"],
+                "description": "How essential this plot point is to the story"
+              }
+            }
+          },
+          "description": "Key plot points in the narrative"
+        }
+      }
+    },
+    "thematicElements": {
+      "type": "object",
+      "description": "Themes and messages explored in the work",
+      "required": ["primaryThemes"],
+      "properties": {
+        "primaryThemes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Main themes explored in the work"
+        },
+        "secondaryThemes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supporting or subtle themes"
+        },
+        "moralQuestions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Ethical or philosophical questions raised"
+        },
+        "socialCommentary": {
+          "type": "string",
+          "description": "Any social or cultural commentary present"
+        }
+      }
+    },
+    "characterArchetypes": {
+      "type": "array",
+      "description": "Key characters and their archetypal roles",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "archetype", "role"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for this character"
+          },
+          "name": {
+            "type": "string",
+            "description": "Character name"
+          },
+          "archetype": {
+            "type": "string",
+            "enum": ["hero", "mentor", "ally", "guardian", "trickster", "shadow", "herald", "shapeshifter", "other"],
+            "description": "Character's archetypal role"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["protagonist", "antagonist", "supporting", "minor"],
+            "description": "Character's narrative importance"
+          },
+          "traits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Key personality traits"
+          },
+          "arc": {
+            "type": "string",
+            "description": "Character's transformation or journey"
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["characterId", "relationshipType"],
+              "properties": {
+                "characterId": {
+                  "type": "string",
+                  "format": "uuid",
+                  "description": "ID of the related character"
+                },
+                "relationshipType": {
+                  "type": "string",
+                  "description": "Nature of the relationship"
+                }
+              }
+            },
+            "description": "Relationships with other characters"
+          }
+        }
+      }
+    },
+    "worldBuilding": {
+      "type": "object",
+      "description": "The setting and world in which the story takes place",
+      "required": ["setting", "timeframe"],
+      "properties": {
+        "setting": {
+          "type": "string",
+          "description": "Primary location or world of the story"
+        },
+        "timeframe": {
+          "type": "string",
+          "enum": ["historical", "contemporary", "near_future", "far_future", "timeless", "multiple_eras"],
+          "description": "When the story takes place"
+        },
+        "worldType": {
+          "type": "string",
+          "enum": ["realistic", "fantasy", "science_fiction", "magical_realism", "alternate_history", "hybrid"],
+          "description": "Type of world"
+        },
+        "culturalContext": {
+          "type": "string",
+          "description": "Cultural, social, or historical context"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Rules governing the world (magic systems, technology, social structures, etc.)"
+        },
+        "atmosphere": {
+          "type": "string",
+          "description": "Overall mood or feeling of the world"
+        }
+      }
+    },
+    "emotionalTone": {
+      "type": "object",
+      "description": "The emotional landscape and tone of the work",
+      "required": ["overallTone", "emotionalRange"],
+      "properties": {
+        "overallTone": {
+          "type": "string",
+          "enum": ["dark", "light", "balanced", "satirical", "serious", "whimsical", "melancholic", "hopeful", "cynical", "optimistic"],
+          "description": "Predominant emotional tone"
+        },
+        "emotionalRange": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Range of emotions explored"
+        },
+        "intensity": {
+          "type": "string",
+          "enum": ["subtle", "moderate", "intense", "extreme"],
+          "description": "Emotional intensity level"
+        },
+        "humorStyle": {
+          "type": "string",
+          "enum": ["none", "dry", "slapstick", "dark", "witty", "absurd", "satirical", "other"],
+          "description": "Type of humor if present"
+        }
+      }
+    },
+    "targetAudience": {
+      "type": "object",
+      "description": "Intended audience for the work",
+      "required": ["ageRange", "contentRating"],
+      "properties": {
+        "ageRange": {
+          "type": "string",
+          "enum": ["children", "middle_grade", "young_adult", "new_adult", "adult", "all_ages"],
+          "description": "Target age demographic"
+        },
+        "contentRating": {
+          "type": "string",
+          "enum": ["G", "PG", "PG-13", "R", "NC-17", "TV-Y", "TV-Y7", "TV-G", "TV-PG", "TV-14", "TV-MA"],
+          "description": "Content rating or maturity level"
+        },
+        "contentWarnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Content warnings for sensitive topics"
+        },
+        "audienceAppeal": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "What makes this appealing to the target audience"
+        }
+      }
+    },
+    "adaptationConsiderations": {
+      "type": "object",
+      "description": "Notes on how this work might be adapted",
+      "properties": {
+        "strengths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Elements that would translate well to other media"
+        },
+        "challenges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Elements that would be difficult to adapt"
+        },
+        "essentialElements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Elements that must be preserved in any adaptation"
+        },
+        "flexibleElements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Elements that can be modified or reimagined"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata about this Creative DNA profile",
+      "properties": {
+        "analysisMethod": {
+          "type": "string",
+          "enum": ["ai_generated", "human_curated", "hybrid"],
+          "description": "How this Creative DNA was created"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence score for AI-generated analyses (0-1)"
+        },
+        "contributors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "People or systems that contributed to this analysis"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes or context"
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when this Creative DNA was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when this Creative DNA was last updated"
+    }
+  }
+}

@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prism-ai-adaptation-studio.com/schemas/adaptation_recommendation.schema.json",
+  "title": "Adaptation Recommendations",
+  "description": "A collection of AI-generated recommendations for adapting a creative work to a different medium, with explainable reasoning and evidence for each decision.",
+  "type": "object",
+  "required": ["id", "version", "creativeDnaId", "sourceWork", "targetMedium", "recommendations", "createdAt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this recommendation set"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of this recommendation schema (e.g., '1.0.0')"
+    },
+    "creativeDnaId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Reference to the Creative DNA profile this recommendation is based on"
+    },
+    "sourceWork": {
+      "type": "object",
+      "description": "Information about the source work being adapted",
+      "required": ["title", "medium"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the source work"
+        },
+        "medium": {
+          "type": "string",
+          "enum": ["novel", "short_story", "screenplay", "stage_play", "comic", "graphic_novel", "video_game", "podcast", "film", "tv_series", "other"],
+          "description": "Original medium of the work"
+        }
+      }
+    },
+    "targetMedium": {
+      "type": "object",
+      "description": "The medium to which the work is being adapted",
+      "required": ["medium", "format"],
+      "properties": {
+        "medium": {
+          "type": "string",
+          "enum": ["film", "tv_series", "stage_play", "musical", "novel", "graphic_novel", "video_game", "podcast", "audio_drama", "web_series", "interactive_fiction", "vr_experience", "other"],
+          "description": "Target medium type"
+        },
+        "format": {
+          "type": "string",
+          "description": "Specific format within the medium (e.g., 'feature film', 'limited series', 'open-world RPG')"
+        },
+        "estimatedLength": {
+          "type": "object",
+          "description": "Estimated length of the adapted work",
+          "properties": {
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Numeric value of the length"
+            },
+            "unit": {
+              "type": "string",
+              "enum": ["minutes", "hours", "episodes", "seasons", "pages", "words", "chapters", "acts"],
+              "description": "Unit of measurement"
+            }
+          }
+        },
+        "platform": {
+          "type": "string",
+          "description": "Intended platform or distribution channel (e.g., 'theatrical', 'streaming', 'Broadway', 'console gaming')"
+        }
+      }
+    },
+    "overallStrategy": {
+      "type": "object",
+      "description": "High-level strategic approach to the adaptation",
+      "required": ["approach", "corePreservation"],
+      "properties": {
+        "approach": {
+          "type": "string",
+          "enum": ["faithful", "interpretive", "loose", "reimagining", "inspired_by"],
+          "description": "Overall adaptation philosophy"
+        },
+        "corePreservation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Core elements that must be preserved from the source"
+        },
+        "targetAudienceAdjustments": {
+          "type": "string",
+          "description": "How the target audience differs and what adjustments are needed"
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "description": "Individual adaptation recommendations with explainable reasoning",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "recommendationId",
+          "category",
+          "title",
+          "proposedChange",
+          "sourceEvidence",
+          "reasoning",
+          "mediumPrinciple",
+          "creativeBenefit",
+          "potentialRisk",
+          "confidence",
+          "alternativeApproach",
+          "decisionStatus"
+        ],
+        "properties": {
+          "recommendationId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for this individual recommendation"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "structure",
+              "pacing",
+              "character",
+              "plot",
+              "theme",
+              "setting",
+              "tone",
+              "point_of_view",
+              "dialogue",
+              "opening",
+              "closing",
+              "subplot",
+              "relationship",
+              "conflict",
+              "world_building",
+              "other"
+            ],
+            "description": "Category of adaptation decision"
+          },
+          "title": {
+            "type": "string",
+            "description": "Brief title summarizing this recommendation"
+          },
+          "proposedChange": {
+            "type": "string",
+            "description": "Clear description of the proposed change or adaptation decision"
+          },
+          "sourceEvidence": {
+            "type": "object",
+            "description": "Evidence from the source work supporting this recommendation",
+            "required": ["elements", "context"],
+            "properties": {
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "description": "Specific elements from the source work (characters, scenes, themes, etc.)"
+              },
+              "context": {
+                "type": "string",
+                "description": "Context explaining how these elements relate to the recommendation"
+              },
+              "quotes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Relevant quotes or specific references from the source (if applicable)"
+              }
+            }
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "Detailed explanation of why this change is recommended, connecting source evidence to the proposed change"
+          },
+          "mediumPrinciple": {
+            "type": "object",
+            "description": "The medium-specific principle or constraint that drives this recommendation",
+            "required": ["principle", "explanation"],
+            "properties": {
+              "principle": {
+                "type": "string",
+                "description": "Name or brief statement of the medium principle (e.g., 'Show, don't tell', 'Visual storytelling', 'Real-time constraints')"
+              },
+              "explanation": {
+                "type": "string",
+                "description": "How this principle applies to the target medium and why it necessitates the change"
+              }
+            }
+          },
+          "creativeBenefit": {
+            "type": "object",
+            "description": "The creative benefits of implementing this recommendation",
+            "required": ["primary", "secondary"],
+            "properties": {
+              "primary": {
+                "type": "string",
+                "description": "Main creative benefit (e.g., 'Enhances emotional impact', 'Improves pacing', 'Strengthens character arc')"
+              },
+              "secondary": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Additional benefits or positive side effects"
+              },
+              "audienceImpact": {
+                "type": "string",
+                "description": "How this benefits the audience experience"
+              }
+            }
+          },
+          "potentialRisk": {
+            "type": "object",
+            "description": "Potential risks or challenges of implementing this recommendation",
+            "required": ["risks", "severity", "mitigation"],
+            "properties": {
+              "risks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "description": "Specific risks or challenges"
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["low", "medium", "high"],
+                "description": "Overall severity of the risks"
+              },
+              "mitigation": {
+                "type": "string",
+                "description": "Strategies to mitigate or manage these risks"
+              },
+              "tradeoffs": {
+                "type": "string",
+                "description": "What might be lost or compromised by making this change"
+              }
+            }
+          },
+          "confidence": {
+            "type": "object",
+            "description": "Confidence assessment for this recommendation",
+            "required": ["score", "factors"],
+            "properties": {
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Confidence score from 0 (low confidence) to 1 (high confidence)"
+              },
+              "factors": {
+                "type": "object",
+                "description": "Factors affecting confidence",
+                "properties": {
+                  "sourceClarity": {
+                    "type": "string",
+                    "enum": ["clear", "moderate", "ambiguous"],
+                    "description": "How clear the source material is regarding this element"
+                  },
+                  "mediumFit": {
+                    "type": "string",
+                    "enum": ["strong", "moderate", "weak"],
+                    "description": "How well this aligns with target medium conventions"
+                  },
+                  "precedent": {
+                    "type": "string",
+                    "enum": ["established", "emerging", "experimental"],
+                    "description": "Whether similar adaptations have been done successfully"
+                  }
+                }
+              },
+              "uncertainties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Specific uncertainties or unknowns affecting confidence"
+              }
+            }
+          },
+          "alternativeApproach": {
+            "type": "object",
+            "description": "Alternative approach(es) to this adaptation decision",
+            "required": ["approach", "comparison"],
+            "properties": {
+              "approach": {
+                "type": "string",
+                "description": "Description of the alternative approach"
+              },
+              "comparison": {
+                "type": "string",
+                "description": "How this alternative compares to the primary recommendation"
+              },
+              "whenToConsider": {
+                "type": "string",
+                "description": "Circumstances under which the alternative might be preferable"
+              }
+            }
+          },
+          "decisionStatus": {
+            "type": "string",
+            "enum": ["proposed", "under_review", "accepted", "rejected", "deferred", "implemented"],
+            "description": "Current status of this recommendation in the decision-making process"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"],
+            "description": "Priority level for implementing this recommendation"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "IDs of other recommendations this depends on or relates to"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes or context for this recommendation"
+          }
+        }
+      }
+    },
+    "aiAnalysis": {
+      "type": "object",
+      "description": "Metadata about the AI analysis",
+      "required": ["model", "analysisDate"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "AI model used to generate these recommendations (e.g., 'IBM Granite 3.0')"
+        },
+        "analysisDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the analysis was performed"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters used for the AI analysis",
+          "additionalProperties": true
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when this recommendation set was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when this recommendation set was last updated"
+    }
+  }
+}

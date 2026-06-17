@@ -62,6 +62,27 @@ async function getIAMToken(apiKey: string): Promise<string> {
   return tokenData.access_token;
 }
 
+// Helper function to check if demo mode should be used
+function shouldUseDemoMode(sourceText: string): boolean {
+  const demoMode = process.env.PRISM_DEMO_MODE === 'true';
+  const isDemoStory = sourceText.includes('The Last Bloom') ||
+                      sourceText.includes('memory orchid') ||
+                      sourceText.includes('Maya');
+  return demoMode && isDemoStory;
+}
+
+// Helper function to load demo fixture
+function loadDemoFixture(fixtureName: string): any {
+  try {
+    const fixturePath = join(process.cwd(), 'src', 'data', 'demo', `${fixtureName}.json`);
+    const fixtureData = readFileSync(fixturePath, 'utf-8');
+    return JSON.parse(fixtureData);
+  } catch (error) {
+    console.error(`Failed to load demo fixture ${fixtureName}:`, error);
+    return null;
+  }
+}
+
 export async function POST(request: Request) {
   try {
     // Read and parse request body with error handling
@@ -91,6 +112,22 @@ export async function POST(request: Request) {
         },
         { status: 400 }
       );
+    }
+
+    // Check if demo mode should be used
+    if (shouldUseDemoMode(sourceText)) {
+      console.log('Using demo mode for Creative DNA analysis');
+      const demoData = loadDemoFixture('creative-dna');
+      
+      if (demoData) {
+        return NextResponse.json({
+          success: true,
+          data: demoData,
+          mode: 'demo'
+        });
+      } else {
+        console.warn('Demo fixture not available, falling back to live AI');
+      }
     }
 
     // Read environment variables
@@ -189,6 +226,27 @@ Return ONLY valid JSON matching the Creative DNA schema. No markdown, no explana
       console.error('watsonx.ai API error:');
       console.error('Status:', response.status);
       console.error('Response body:', errorText);
+
+      // Check for quota exceeded error and fall back to demo if available
+      if (response.status === 403 && errorText.includes('token_quota_reached')) {
+        console.log('Token quota exceeded, attempting demo fallback');
+        const isDemoStory = sourceText.includes('The Last Bloom') ||
+                            sourceText.includes('memory orchid') ||
+                            sourceText.includes('Maya');
+        
+        if (isDemoStory) {
+          const demoData = loadDemoFixture('creative-dna');
+          if (demoData) {
+            console.log('Using demo fixture due to quota limit');
+            return NextResponse.json({
+              success: true,
+              data: demoData,
+              mode: 'demo',
+              reason: 'quota_exceeded'
+            });
+          }
+        }
+      }
 
       return NextResponse.json(
         {

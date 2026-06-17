@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { CreativeDNA, AdaptationPlan, AdaptationRecommendation, DecisionStatus } from '@/types';
+import { CreativeDNA, AdaptationPlan, AdaptationRecommendation, DecisionStatus, ProductionBlueprint } from '@/types';
 import CreativeDNADisplay from '@/components/CreativeDNADisplay';
 import AdaptationPlanDisplay from '@/components/AdaptationPlan';
+import ProductionBlueprintDisplay from '@/components/ProductionBlueprint';
 
 const DEMO_STORY = `# The Last Bloom
 
@@ -83,6 +84,14 @@ export default function Home() {
   const [adaptationLoading, setAdaptationLoading] = useState(false);
   const [adaptationError, setAdaptationError] = useState<string | null>(null);
 
+  // Production blueprint state
+  const [productionBlueprint, setProductionBlueprint] = useState<ProductionBlueprint | null>(null);
+  const [blueprintLoading, setBlueprintLoading] = useState(false);
+  const [blueprintError, setBlueprintError] = useState<string | null>(null);
+
+  // Demo mode tracking
+  const [demoModeActive, setDemoModeActive] = useState(false);
+
   const handleLoadDemo = () => {
     setSourceText(DEMO_STORY);
     setError(null);
@@ -91,6 +100,8 @@ export default function Home() {
     setRecommendations([]);
     setDecisions({});
     setAdaptationError(null);
+    setProductionBlueprint(null);
+    setBlueprintError(null);
   };
 
   const handleAnalyze = async () => {
@@ -105,6 +116,8 @@ export default function Home() {
     setAdaptationPlan(null);
     setRecommendations([]);
     setAdaptationError(null);
+    setProductionBlueprint(null);
+    setBlueprintError(null);
 
     try {
       const response = await fetch('/api/analyze-creative-dna', {
@@ -122,6 +135,7 @@ export default function Home() {
       }
 
       setCreativeDNA(data.data);
+      setDemoModeActive(data.mode === 'demo');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     } finally {
@@ -137,6 +151,8 @@ export default function Home() {
     setAdaptationPlan(null);
     setRecommendations([]);
     setDecisions({});
+    setProductionBlueprint(null);
+    setBlueprintError(null);
 
     try {
       const response = await fetch('/api/recommend-adaptation', {
@@ -166,6 +182,9 @@ export default function Home() {
 
       setAdaptationPlan(data.data);
       setRecommendations(data.data.recommendations);
+      if (data.mode === 'demo') {
+        setDemoModeActive(true);
+      }
       
       // Initialize all decisions as pending using recommendationId
       const initialDecisions: Record<string, DecisionStatus> = {};
@@ -194,6 +213,59 @@ export default function Home() {
     }));
   };
 
+  const handleGenerateBlueprint = async () => {
+    if (!creativeDNA || !adaptationPlan) return;
+
+    // Check for at least one accepted recommendation
+    const acceptedCount = Object.values(decisions).filter(d => d === 'accepted').length;
+    if (acceptedCount === 0) {
+      setBlueprintError('At least one accepted recommendation is required to generate a production blueprint');
+      return;
+    }
+
+    setBlueprintLoading(true);
+    setBlueprintError(null);
+    setProductionBlueprint(null);
+
+    try {
+      const response = await fetch('/api/generate-production-blueprint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          creativeDNA,
+          adaptationPlan,
+          decisions,
+          targetMedium: {
+            format: 'short-film',
+            platform: platform.toLowerCase(),
+            duration: {
+              minimumSeconds: Math.max(540, (duration - 6) * 60),
+              maximumSeconds: duration * 60
+            },
+            additionalContext: `${duration}-minute ${platform.toLowerCase()} short film`
+          }
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Production blueprint generation failed');
+      }
+
+      setProductionBlueprint(data.data);
+      if (data.mode === 'demo') {
+        setDemoModeActive(true);
+      }
+    } catch (err) {
+      setBlueprintError(err instanceof Error ? err.message : 'An unexpected error occurred');
+    } finally {
+      setBlueprintLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -209,6 +281,23 @@ export default function Home() {
             Short Story → Short Film
           </p>
         </header>
+
+        {/* Demo Mode Banner */}
+        {demoModeActive && (
+          <div className="bg-amber-500/20 backdrop-blur-lg border border-amber-500/50 rounded-lg p-4 mb-8">
+            <div className="flex items-start">
+              <svg className="w-6 h-6 text-amber-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <h3 className="text-lg font-semibold text-amber-300 mb-1">Demo Mode Active</h3>
+                <p className="text-amber-200 text-sm">
+                  {"Using pre-generated demo fixtures for \"The Last Bloom\" story. No AI API calls are being made. This demonstrates the system's capabilities without consuming API tokens."}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Input Section */}
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-8 border border-white/20 shadow-2xl">
@@ -409,7 +498,7 @@ export default function Home() {
 
         {/* Adaptation Plan Display */}
         {adaptationPlan && recommendations.length > 0 && (
-          <div className="mt-8">
+          <div className="mt-8 space-y-8">
             <AdaptationPlanDisplay
               plan={adaptationPlan}
               recommendations={recommendations}
@@ -417,6 +506,60 @@ export default function Home() {
               onAccept={handleAcceptRecommendation}
               onReject={handleRejectRecommendation}
             />
+
+            {/* Generate Production Blueprint Button */}
+            {!productionBlueprint && (
+              <div className="bg-green-500/10 backdrop-blur-lg border border-green-500/30 rounded-lg p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold text-green-300 mb-2">Ready to Generate Production Blueprint?</h3>
+                    <p className="text-green-200 text-sm">
+                      {Object.values(decisions).filter(d => d === 'accepted').length} recommendation(s) accepted
+                      {Object.values(decisions).filter(d => d === 'accepted').length === 0 && ' - At least one required'}
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleGenerateBlueprint}
+                    disabled={blueprintLoading || Object.values(decisions).filter(d => d === 'accepted').length === 0}
+                    className="px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white font-semibold rounded-lg shadow-lg hover:from-green-700 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                  >
+                    {blueprintLoading ? (
+                      <span className="flex items-center">
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Generating Blueprint...
+                      </span>
+                    ) : (
+                      '🎬 Generate Production Blueprint'
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Blueprint Error Display */}
+        {blueprintError && (
+          <div className="bg-red-500/10 backdrop-blur-lg border border-red-500/30 rounded-lg p-6 mt-8">
+            <div className="flex items-start">
+              <svg className="w-6 h-6 text-red-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <h3 className="text-lg font-semibold text-red-300 mb-1">Production Blueprint Error</h3>
+                <p className="text-red-200">{blueprintError}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Production Blueprint Display */}
+        {productionBlueprint && (
+          <div className="mt-8">
+            <ProductionBlueprintDisplay blueprint={productionBlueprint} />
           </div>
         )}
       </div>

@@ -1,0 +1,640 @@
+{
+  "blueprintId": "82c15301-33c8-4fde-8344-bf747dcaee07",
+  "sourceTitle": "The Last Bloom",
+  "createdAt": "2024-01-15T10:30:00Z",
+  "targetMedium": {
+    "format": "short-film",
+    "platform": "festival",
+    "duration": {
+      "minimumSeconds": 540,
+      "maximumSeconds": 900
+    },
+    "additionalContext": "15-minute festival short film"
+  },
+  "targetDuration": {
+    "minimumMinutes": 9,
+    "maximumMinutes": 15
+  },
+  "decisionSummary": {
+    "totalRecommendationsReviewed": 6,
+    "acceptedCount": 3,
+    "rejectedCount": 2,
+    "pendingCount": 1,
+    "unresolvedCreativeDecisions": [
+      "Final ending approach - ambiguous versus resolved"
+    ],
+    "intendedAudience": "Festival audiences who appreciate contemplative, visually-driven narratives with magical realism elements"
+  },
+  "adaptationDirection": {
+    "approach": "Interpretive adaptation that honors the source's contemplative tone while using cinematic language",
+    "centralEmotionalPromise": "A quiet, visually stunning meditation on reconciliation, care, and the courage to return to what we've abandoned",
+    "corePremiseToPreserve": "A woman returns to her grandmother's greenhouse and discovers a rare orchid blooming after fifteen years, leading her to understand the value of patient, invisible care",
+    "primaryThemesToProtect": [
+      "The value of patient, consistent care over time",
+      "Reconciliation with the past and with loss",
+      "The vulnerability required to love something that needs tending"
+    ],
+    "intendedAudienceExperience": "Audiences should feel the weight of Maya's grief and distance, then experience her gradual opening through the sensory immersion of the greenhouse and the wonder of the orchid's bloom",
+    "majorAdaptationPriorities": [
+      "Translate internal monologue into visual storytelling and physical action",
+      "Use the greenhouse as a living, breathing character through cinematography and sound design",
+      "Create a contemplative pace that feels earned rather than slow",
+      "Make the orchid's bloom feel genuinely magical and meaningful"
+    ],
+    "majorCreativeBoundaries": [
+      "Do not add external plot complications that distract from the core greenhouse journey",
+      "Avoid over-explaining themes or Maya's emotional state through dialogue",
+      "Preserve the story's quiet, intimate scale",
+      "Maintain the magical realism tone without tipping into full fantasy"
+    ]
+  },
+  "sceneRoadmap": [
+    {
+      "sceneNumber": 1,
+      "workingTitle": "The Orchid Awakens",
+      "narrativePurpose": "establish-setting",
+      "keyCharacters": [],
+      "setting": {
+        "primaryLocation": "Greenhouse interior, special collection room",
+        "timeContext": "Dawn, soft morning light"
+      },
+      "estimatedDurationSeconds": 45,
+      "majorEmotionalBeat": "Wonder and mystery",
+      "essentialStoryInformation": [
+        "The memory orchid exists and is beginning to bloom",
+        "The greenhouse is a magical, living space",
+        "Something significant is about to happen"
+      ],
+      "acceptedRecommendationIds": [
+        "1900c131-9e01-4e9e-b611-e0295ff3be89"
+      ],
+      "creativeDNAElements": [
+        {
+          "element": "key-symbol",
+          "preservation": "The memory orchid is introduced as the central symbol before we meet the protagonist"
+        },
+        {
+          "element": "premise",
+          "preservation": "Visual establishment of the rare bloom that will drive the story"
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "source": "Story description of the orchid",
+          "context": "The orchid's twilight colors and magical quality are central to the story's tone"
+        }
+      ],
+      "adaptationPrinciple": [
+        "visual-first-storytelling",
+        "symbolic-opening"
+      ],
+      "visualOrSonicOpportunity": "Extreme close-up of orchid bud with twilight colors, soft focus on greenhouse glass, natural dawn sounds",
+      "productionNote": "Requires practical or high-quality artificial orchid; lighting critical for magical quality"
+    },
+    {
+      "sceneNumber": 2,
+      "workingTitle": "Maya Arrives",
+      "narrativePurpose": "establish-protagonist",
+      "keyCharacters": [
+        "Maya"
+      ],
+      "setting": {
+        "primaryLocation": "Exterior of greenhouse and property",
+        "timeContext": "Mid-morning, bright daylight"
+      },
+      "estimatedDurationSeconds": 90,
+      "majorEmotionalBeat": "Reluctance and tension",
+      "essentialStoryInformation": [
+        "Maya has returned after a long absence",
+        "She is conflicted about being here",
+        "The greenhouse holds both attraction and pain for her"
+      ],
+      "acceptedRecommendationIds": [
+        "1900c131-9e01-4e9e-b611-e0295ff3be89",
+        "6ce824ab-a779-4a35-a230-ffbd13fe95d0"
+      ],
+      "creativeDNAElements": [
+        {
+          "element": "central-conflict",
+          "preservation": "Maya's hesitation and physical distance from the greenhouse shows her internal conflict"
+        },
+        {
+          "element": "character-arc",
+          "preservation": "Establishing Maya's starting point of emotional distance"
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "source": "Maya's arrival at the greenhouse",
+          "context": "Her reluctance and the weight of fifteen years of absence"
+        }
+      ],
+      "adaptationPrinciple": [
+        "show-dont-tell",
+        "physical-action-reveals-emotion"
+      ],
+      "visualOrSonicOpportunity": "Maya's car approaching, her hesitation at the gate, touching the key, long shots emphasizing distance",
+      "productionNote": "Actress must convey complex emotion through minimal dialogue and physical behavior"
+    },
+    {
+      "sceneNumber": 3,
+      "workingTitle": "Entering the Past",
+      "narrativePurpose": "reveal-key-relationship",
+      "keyCharacters": [
+        "Maya"
+      ],
+      "setting": {
+        "primaryLocation": "Greenhouse main room",
+        "timeContext": "Late morning, filtered sunlight"
+      },
+      "estimatedDurationSeconds": 120,
+      "majorEmotionalBeat": "Memory and regret",
+      "essentialStoryInformation": [
+        "The greenhouse is full of her grandmother's presence",
+        "Maya remembers her childhood here",
+        "The space triggers both comfort and pain"
+      ],
+      "acceptedRecommendationIds": [
+        "6ce824ab-a779-4a35-a230-ffbd13fe95d0"
+      ],
+      "creativeDNAElements": [
+        {
+          "element": "relationship-dynamic",
+          "preservation": "Maya's relationship with her grandmother is revealed through the space and objects, not exposition"
+        },
+        {
+          "element": "emotional-tone",
+          "preservation": "Melancholic tone established through Maya's careful, tentative movements"
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "source": "Maya's first moments inside the greenhouse",
+          "context": "Her sensory memories and the weight of absence"
+        }
+      ],
+      "adaptationPrinciple": [
+        "environmental-storytelling",
+        "sensory-immersion"
+      ],
+      "visualOrSonicOpportunity": "Humid air visible in light, water dripping, Maya touching plants, finding grandmother's journals",
+      "productionNote": "Sound design critical - greenhouse should feel alive; practical effects for humidity and light"
+    },
+    {
+      "sceneNumber": 4,
+      "workingTitle": "The Special Collection",
+      "narrativePurpose": "create-midpoint-shift",
+      "keyCharacters": [
+        "Maya"
+      ],
+      "setting": {
+        "primaryLocation": "Special collection room",
+        "timeContext": "Early afternoon, controlled lighting"
+      },
+      "estimatedDurationSeconds": 150,
+      "majorEmotionalBeat": "Discovery and wonder",
+      "essentialStoryInformation": [
+        "Maya discovers the memory orchid",
+        "She realizes it's blooming today, after fifteen years",
+        "Her grandmother planned this moment"
+      ],
+      "acceptedRecommendationIds": [
+        "1900c131-9e01-4e9e-b611-e0295ff3be89",
+        "82c15301-33c8-4fde-8344-bf747dcaee06"
+      ],
+      "creativeDNAElements": [
+        {
+          "element": "narrative-turning-point",
+          "preservation": "The discovery of the blooming orchid is the story's central revelation"
+        },
+        {
+          "element": "premise",
+          "preservation": "The fifteen-year bloom cycle and its timing are the heart of the premise"
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "source": "Maya finding the orchid and reading the placard",
+          "context": "The realization that her grandmother timed everything for this moment"
+        }
+      ],
+      "adaptationPrinciple": [
+        "visual-revelation",
+        "compressed-timeline"
+      ],
+      "visualOrSonicOpportunity": "Orchid in full bloom, twilight colors, Maya's face in the glow, silence broken by her breath",
+      "productionNote": "This is the visual and emotional centerpiece; lighting and orchid design are critical"
+    },
+    {
+      "sceneNumber": 5,
+      "workingTitle": "Witnessing the Bloom",
+      "narrativePurpose": "intensify-emotional-pressure",
+      "keyCharacters": [
+        "Maya"
+      ],
+      "setting": {
+        "primaryLocation": "Special collection room",
+        "timeContext": "Late afternoon into evening, changing light"
+      },
+      "estimatedDurationSeconds": 180,
+      "majorEmotionalBeat": "Grief, acceptance, and opening",
+      "essentialStoryInformation": [
+        "Maya stays to watch the orchid fully open",
+        "She reads her grandmother's journals",
+        "She begins to understand what she walked away from"
+      ],
+      "acceptedRecommendationIds": [
+        "6ce824ab-a779-4a35-a230-ffbd13fe95d0",
+        "82c15301-33c8-4fde-8344-bf747dcaee06"
+      ],
+      "creativeDNAElements": [
+        {
+          "element": "primary-theme",
+          "preservation": "The theme of patient care is embodied in Maya's choice to stay and witness"
+        },
+        {
+          "element": "character-arc",
+          "preservation": "Maya's transformation happens through quiet observation and presence"
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "source": "Maya watching the orchid bloom",
+          "context": "Her decision to stay and witness rather than capture or leave"
+        }
+      ],
+      "adaptationPrinciple": [
+        "time-passage",
+        "contemplative-pacing"
+      ],
+      "visualOrSonicOpportunity": "Time-lapse of light changing, orchid opening, Maya's stillness, journal pages turning",
+      "productionNote": "Longest scene; requires careful pacing to maintain engagement during quiet observation"
+    },
+    {
+      "sceneNumber": 6,
+      "workingTitle": "The Key",
+      "narrativePurpose": "resolve-central-question",
+      "keyCharacters": [
+        "Maya"
+      ],
+      "setting": {
+        "primaryLocation": "Greenhouse exterior",
+        "timeContext": "Dusk, twilight matching orchid colors"
+      },
+      "estimatedDurationSeconds": 75,
+      "majorEmotionalBeat": "Quiet resolution and commitment",
+      "essentialStoryInformation": [
+        "Maya locks the greenhouse",
+        "She keeps the key",
+        "Her decision to return is implied through her actions"
+      ],
+      "acceptedRecommendationIds": [],
+      "creativeDNAElements": [
+        {
+          "element": "key-symbol",
+          "preservation": "The key represents access, inheritance, and the choice to return"
+        },
+        {
+          "element": "emotional-tone",
+          "preservation": "Hopeful melancholy - sadness and possibility coexist"
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "source": "Story's ending with the key",
+          "context": "Maya walking away with the key warm in her pocket"
+        }
+      ],
+      "adaptationPrinciple": [
+        "visual-closure",
+        "ambiguous-resolution"
+      ],
+      "visualOrSonicOpportunity": "Maya locking door, pocketing key, orchid glowing through glass, her changed posture",
+      "productionNote": "Ending approach still under consideration - see open creative questions"
+    }
+  ],
+  "characterPriorities": [
+    {
+      "characterName": "Maya",
+      "dramaticFunction": "Protagonist undergoing transformation from emotional distance to openness",
+      "essentialArc": "From someone who fled vulnerability and care to someone who chooses to return and learn the language of tending",
+      "keyRelationship": "Posthumous relationship with her grandmother, mediated through the greenhouse and orchid",
+      "essentialTraits": [
+        "Guarded",
+        "Intelligent",
+        "Carrying grief and regret",
+        "Capable of wonder",
+        "Seeking but afraid"
+      ],
+      "adaptationFocus": "Maya must convey complex internal states through physical behavior, minimal dialogue, and reactions to the space. Her transformation must be visible in her body language and relationship to the plants.",
+      "whatMustNotBeLost": "Her fundamental conflict between independence and connection, and her capacity for both distance and deep feeling",
+      "acceptedRecommendationIds": [
+        "6ce824ab-a779-4a35-a230-ffbd13fe95d0"
+      ],
+      "creativeDNAProtected": [
+        {
+          "element": "arc",
+          "function": "Maya's journey from distance to connection is the story's spine"
+        },
+        {
+          "element": "motivation",
+          "function": "Her fear of vulnerability and loss drives her initial distance"
+        }
+      ]
+    }
+  ],
+  "visualLanguage": {
+    "overallApproach": "Intimate, sensory cinematography that makes the greenhouse feel alive. Use natural light, shallow depth of field, and close-ups to create immersion. The orchid should feel genuinely magical through lighting and framing.",
+    "visualMotifs": [
+      {
+        "motif": "Light through glass and water",
+        "creativeDNAConnection": "Represents the greenhouse as a space of transformation and growth"
+      },
+      {
+        "motif": "Hands touching plants",
+        "creativeDNAConnection": "Physical connection as metaphor for emotional opening"
+      },
+      {
+        "motif": "Twilight colors",
+        "creativeDNAConnection": "The orchid's colors echo throughout, representing the liminal space between past and future"
+      }
+    ],
+    "symbolicImagery": [
+      {
+        "symbol": "The memory orchid",
+        "meaning": "Patient love, delayed understanding, beauty that requires time"
+      },
+      {
+        "symbol": "The key",
+        "meaning": "Access, inheritance, choice to return"
+      },
+      {
+        "symbol": "Grandmother's journals",
+        "meaning": "Invisible work made visible, legacy of care"
+      }
+    ],
+    "colorPalette": {
+      "description": "Dominated by greens and earth tones of the greenhouse, punctuated by the orchid's twilight purples and blues. Warm golden light for memory, cool blues for present.",
+      "primaryColors": [
+        "Deep green",
+        "Earth brown",
+        "Twilight purple"
+      ],
+      "secondaryColors": [
+        "Golden amber",
+        "Soft blue",
+        "Warm cream"
+      ],
+      "mood": "Organic, alive, with moments of ethereal beauty"
+    },
+    "lightingDirection": "Natural light is primary - use actual greenhouse lighting conditions. The orchid should have its own subtle glow (practical or enhanced). Avoid artificial-feeling lighting; everything should feel organic.",
+    "framingAndComposition": "Intimate framing - lots of close-ups and medium shots. Use the greenhouse's glass and plants to create natural frames within frames. Shallow depth of field to create sensory immersion.",
+    "cameraMovement": "Mostly static or slow, deliberate movements. Camera should feel observant, patient - matching Maya's growing stillness. Avoid shaky handheld except possibly for Maya's initial tension.",
+    "environmentalStorytelling": "The greenhouse tells the grandmother's story through its organization, the health of plants, the journals, the special collection. Every detail should feel intentional and cared-for.",
+    "meaningfulObjects": [
+      {
+        "object": "Grandmother's watering can",
+        "narrative_significance": "Represents the daily, invisible work of care"
+      },
+      {
+        "object": "The brass key",
+        "narrative_significance": "Inheritance, access, and the choice to return"
+      },
+      {
+        "object": "Plant journals",
+        "narrative_significance": "The grandmother's voice and her patient observation"
+      }
+    ],
+    "visualContrasts": [
+      "Maya's modern clothing against the organic greenhouse",
+      "Her initial stiffness versus her eventual stillness",
+      "The bright exterior world versus the humid, intimate greenhouse interior"
+    ],
+    "transitionsAndEchoes": "Use light changes to mark time passage. The orchid's twilight colors should echo in the actual twilight of the final scene. Maya's initial hesitant touch of plants should echo in her final, more confident gesture of locking the door."
+  },
+  "sonicLanguage": {
+    "overallApproach": "Naturalistic sound design that makes the greenhouse feel alive, with minimal score. Silence is used strategically. When music appears, it should feel organic, not imposed.",
+    "musicDirection": "Minimal, atmospheric score. Consider using only diegetic music (perhaps from grandmother's old radio) or no score at all, letting sound design carry emotional weight. If score is used, it should be sparse, piano or strings, emerging only in key moments.",
+    "recurringMusicMotifs": [
+      {
+        "motif": "Simple piano theme",
+        "purpose": "Associated with grandmother's presence and Maya's memories"
+      }
+    ],
+    "ambientSoundStrategy": "Rich, layered greenhouse sounds: water dripping, leaves rustling, glass creaking, distant birds. These sounds should feel almost musical in their rhythm and layering. The greenhouse breathes.",
+    "recurringSoundMotifs": [
+      {
+        "sound": "Water dripping",
+        "meaning": "Constant, patient care; the passage of time"
+      },
+      {
+        "sound": "Glass creaking",
+        "meaning": "The greenhouse as a living structure"
+      }
+    ],
+    "silenceAndRestraint": "Use silence strategically, especially in the orchid discovery scene. Let moments breathe. Silence emphasizes Maya's isolation and creates space for audience reflection.",
+    "dialogueDensity": "mostly-silent",
+    "offScreenSoundOpportunities": [
+      "Distant traffic reminding us of the outside world Maya left",
+      "Birds outside the greenhouse",
+      "Wind against glass"
+    ],
+    "emotionalSoundTransitions": "Transition from the harsh sounds of Maya's car and the outside world to the soft, organic sounds of the greenhouse. Her breathing becomes part of the soundscape.",
+    "symbolicAudioElements": [
+      {
+        "element": "Maya's breathing",
+        "symbolism": "Her emotional state and growing calm"
+      },
+      {
+        "element": "The greenhouse's ambient hum",
+        "symbolism": "The space as a living entity"
+      }
+    ]
+  },
+  "pacingPlan": {
+    "openingPace": "Slow and deliberate - establish the orchid and Maya's arrival with patience. Set the contemplative tone immediately.",
+    "earlyDevelopment": "Gradual immersion into the greenhouse. Let the audience adjust to the quiet pace and sensory detail. Build Maya's emotional state through observation.",
+    "midpointShift": "The orchid discovery accelerates emotional intensity while maintaining quiet tone. This is the story's peak of wonder.",
+    "escalation": "Time passage during the bloom creates gentle escalation through light changes and Maya's deepening engagement.",
+    "climaxTiming": "The emotional climax is quiet - Maya's acceptance and decision, shown through her stillness and changed relationship to the space.",
+    "resolution": "Brief, understated. The key and the locked door tell us everything we need to know.",
+    "endingRhythm": "Match the opening's pace - slow, observant, allowing the final image to resonate.",
+    "runtimeAllocation": {
+      "openingMinutes": 2.25,
+      "developmentMinutes": 3.5,
+      "midpointMinutes": 2.5,
+      "escalationMinutes": 3,
+      "climaxMinutes": 2.5,
+      "resolutionMinutes": 1.25
+    }
+  },
+  "productionConsiderations": {
+    "summary": "Intimate, location-dependent production requiring a real greenhouse or convincing set. Single actor for most of runtime. Heavy reliance on practical effects (plants, water, light) and sound design. Technically achievable but requires careful attention to natural lighting and the orchid's magical quality.",
+    "essentialNeeds": [
+      {
+        "need": "Greenhouse location or detailed set",
+        "category": "location",
+        "priority": "essential"
+      },
+      {
+        "need": "Practical or high-quality artificial memory orchid",
+        "category": "props",
+        "priority": "essential"
+      },
+      {
+        "need": "Strong lead actress capable of minimal-dialogue performance",
+        "category": "cast",
+        "priority": "essential"
+      },
+      {
+        "need": "Experienced cinematographer comfortable with natural light",
+        "category": "other",
+        "priority": "essential"
+      },
+      {
+        "need": "Detailed sound design and mixing",
+        "category": "sound",
+        "priority": "essential"
+      }
+    ],
+    "locationRequirements": [
+      "Greenhouse with special collection room or ability to create one",
+      "Exterior area for arrival and departure",
+      "Access for multiple days to capture different light conditions"
+    ],
+    "castComplexity": {
+      "speakingRoles": 1,
+      "backgroundCastNeeds": "None required; Maya is alone throughout"
+    },
+    "technicalConsiderations": {
+      "complexBlocking": false,
+      "nightOrExteriorShooting": true,
+      "weatherDependent": false,
+      "continuityConcerns": [
+        "Orchid bloom progression must be consistent",
+        "Light continuity across scenes",
+        "Plant arrangement must remain constant"
+      ]
+    },
+    "highCostElements": [
+      "Greenhouse location rental or set construction",
+      "Custom orchid creation if practical version not available",
+      "Extended shooting time for natural light conditions",
+      "Detailed sound design and post-production"
+    ],
+    "simplificationOpportunities": [
+      "Single location reduces complexity",
+      "One actor minimizes scheduling challenges",
+      "Minimal dialogue reduces ADR needs",
+      "Natural lighting reduces lighting package costs"
+    ]
+  },
+  "feasibilityNotes": {
+    "overallAssessment": "Highly feasible for experienced short film team. The intimate scale and single location make this achievable, but success depends on finding the right greenhouse location and actress. The contemplative pace is a creative choice that may limit audience but is essential to the story.",
+    "runtimeFeasibility": "15 minutes is ideal for this story. Six scenes with the proposed durations fit comfortably within target. The pacing allows for the contemplative tone without feeling padded.",
+    "sceneCount": {
+      "count": 6,
+      "feasibility": "Appropriate for the story and runtime. Each scene has clear purpose and sufficient time to breathe."
+    },
+    "locationComplexity": {
+      "uniqueLocations": 2,
+      "feasibility": "medium-high - requires suitable greenhouse location or convincing set construction"
+    },
+    "castComplexity": "low - single lead actress with minimal dialogue performance requirements",
+    "productionComplexity": "medium - natural lighting requirements and orchid prop quality are key challenges",
+    "likelyResourcePressure": "Location rental/set construction, extended shooting time for natural light, custom orchid prop, detailed sound design",
+    "scopeReductionAreas": [
+      "Could simplify greenhouse dressing if needed",
+      "Could reduce number of plant species shown",
+      "Could shorten time-lapse sequences"
+    ],
+    "strengthAreas": [
+      "Single location reduces logistical complexity",
+      "One actor minimizes scheduling challenges",
+      "Natural lighting reduces equipment costs",
+      "Minimal dialogue reduces ADR needs"
+    ]
+  },
+  "creativeRisksAndSafeguards": [
+    {
+      "riskDescription": "Contemplative pacing may not engage all audiences",
+      "whyItMatters": "The slow, meditative pace is essential to the story but could lose viewers expecting traditional narrative momentum",
+      "affectedCreativeDNAElement": "emotional_tone",
+      "likelihood": "medium",
+      "potentialImpact": "Some festival audiences may find it too slow; could limit distribution appeal",
+      "mitigationStrategy": "Test with focus audiences early; ensure visual storytelling is compelling enough to maintain interest despite minimal dialogue and action",
+      "acceptedRecommendationId": "82c15301-33c8-4fde-8344-bf747dcaee06"
+    },
+    {
+      "riskDescription": "Minimal dialogue could make emotional beats unclear",
+      "whyItMatters": "Maya's transformation must be visible without extensive verbal exposition",
+      "affectedCreativeDNAElement": "character_arc",
+      "likelihood": "medium",
+      "potentialImpact": "Audiences might miss subtle emotional shifts or misread Maya's intentions",
+      "mitigationStrategy": "Strong direction and performance; use visual cues, body language, and sound design to clarify emotional states; test key scenes for clarity",
+      "acceptedRecommendationId": "6ce824ab-a779-4a35-a230-ffbd13fe95d0"
+    },
+    {
+      "riskDescription": "Orchid prop quality critical to magical realism tone",
+      "whyItMatters": "The orchid is the central symbol; if it looks fake or unimpressive, the entire magical realism premise fails",
+      "affectedCreativeDNAElement": "premise",
+      "likelihood": "high",
+      "potentialImpact": "Poor orchid execution could make the film feel cheap or unconvincing, undermining the emotional payoff",
+      "mitigationStrategy": "Budget for professional prop creation; test with cinematographer before principal photography; consider practical effects for glow; have backup options",
+      "acceptedRecommendationId": "1900c131-9e01-4e9e-b611-e0295ff3be89"
+    }
+  ],
+  "openCreativeQuestions": [
+    {
+      "unresolvedChoice": "Should the ending be ambiguous (Maya with key) or resolved (showing her return)?",
+      "whyItMatters": "This affects the final scene content, emotional closure, and audience satisfaction",
+      "affectedElement": "structure",
+      "availableOptions": [
+        "Ambiguous: End with Maya pocketing the key, implying but not showing her commitment to return",
+        "Resolved: Show Maya returning the next day and beginning to tend the plants",
+        "Hybrid: Show Maya's changed demeanor and the key, with a final shot suggesting future return"
+      ],
+      "likelyTradeoffs": [
+        "Ambiguity maintains artistic sophistication but may frustrate some viewers",
+        "Resolution provides satisfaction but may feel too neat or predictable",
+        "Hybrid approach attempts balance but risks pleasing no one"
+      ],
+      "fromPendingRecommendation": true,
+      "resolutionTiming": "before-production"
+    },
+    {
+      "unresolvedChoice": "Should we include any voiceover from grandmother's journals?",
+      "whyItMatters": "Could provide emotional depth and grandmother's voice, but risks breaking contemplative tone",
+      "affectedElement": "sonic-approach",
+      "availableOptions": [
+        "No voiceover: Maintain complete silence except diegetic sound",
+        "Minimal voiceover: Brief journal excerpts at key moments only",
+        "Integrated voiceover: Maya reading aloud as she discovers journals"
+      ],
+      "likelyTradeoffs": [
+        "Voiceover adds exposition and emotional resonance but could feel literary rather than cinematic",
+        "Silence is purer and more challenging but maintains contemplative integrity",
+        "Minimal voiceover attempts compromise but may feel inconsistent"
+      ],
+      "fromPendingRecommendation": true,
+      "resolutionTiming": "before-screenplay-drafting"
+    }
+  ],
+  "finalCreativeHandoff": {
+    "adaptationCentralDirection": "Create an intimate, visually-driven meditation on reconciliation and care that honors the source's contemplative tone while using cinematic language to make Maya's internal journey visible and emotionally resonant.",
+    "mostImportantPreservedElements": [
+      "The greenhouse as a living, breathing character through cinematography and sound design",
+      "The memory orchid's symbolic significance as patient love and delayed understanding",
+      "Maya's journey from emotional distance to openness and connection",
+      "The theme of patient, invisible care and its transformative power"
+    ],
+    "strongestAcceptedDecisions": [
+      "Visual-first opening with the orchid establishes tone and symbol immediately (Rec #1)",
+      "Externalizing Maya's internal conflict through physical actions and reactions (Rec #2)",
+      "Compressed single-day timeline creates dramatic unity and natural pacing (Rec #3)"
+    ],
+    "largestRemainingChallenge": "Maintaining audience engagement with minimal dialogue while preserving the story's contemplative essence. Success depends on exceptional visual storytelling, immersive sound design, and a performance that conveys complex emotions through physical behavior.",
+    "nextRecommendedAction": "location-scouting",
+    "additionalGuidance": "The greenhouse location is absolutely critical—begin scouting immediately and consider building relationships with botanical gardens or conservatories. The orchid prop should be developed in parallel with cinematography planning to ensure it photographs as magically as intended. Prioritize finding an actress who can convey deep emotion through minimal dialogue and physical presence."
+  }
+}

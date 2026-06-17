@@ -74,6 +74,27 @@ function isValidUUID(str: string): boolean {
   return typeof str === 'string' && uuidRegex.test(str);
 }
 
+// Helper function to check if demo mode should be used
+function shouldUseDemoMode(creativeDNA: any): boolean {
+  const demoMode = process.env.PRISM_DEMO_MODE === 'true';
+  const isDemoStory = creativeDNA?.sourceWork?.title?.includes('The Last Bloom') ||
+                      creativeDNA?.premise?.includes('memory orchid') ||
+                      creativeDNA?.premise?.includes('Maya');
+  return demoMode && isDemoStory;
+}
+
+// Helper function to load demo fixture
+function loadDemoFixture(fixtureName: string): any {
+  try {
+    const fixturePath = join(process.cwd(), 'src', 'data', 'demo', `${fixtureName}.json`);
+    const fixtureData = readFileSync(fixturePath, 'utf-8');
+    return JSON.parse(fixtureData);
+  } catch (error) {
+    console.error(`Failed to load demo fixture ${fixtureName}:`, error);
+    return null;
+  }
+}
+
 export async function POST(request: Request) {
   try {
     // Read and parse request body with error handling
@@ -145,6 +166,22 @@ export async function POST(request: Request) {
         },
         { status: 400 }
       );
+    }
+
+    // Check if demo mode should be used
+    if (shouldUseDemoMode(creativeDNA)) {
+      console.log('Using demo mode for Adaptation Recommendation');
+      const demoData = loadDemoFixture('adaptation-plan');
+      
+      if (demoData) {
+        return NextResponse.json({
+          success: true,
+          data: demoData,
+          mode: 'demo'
+        });
+      } else {
+        console.warn('Demo fixture not available, falling back to live AI');
+      }
     }
 
     // Read environment variables
@@ -249,6 +286,23 @@ Generate adaptation recommendations in valid JSON format matching the Adaptation
       console.error('watsonx.ai API error:');
       console.error('Status:', response.status);
       console.error('Response body:', errorText);
+
+      // Check for quota exceeded error and fall back to demo if available
+      if (response.status === 403 && errorText.includes('token_quota_reached')) {
+        console.log('Token quota exceeded, attempting demo fallback');
+        if (shouldUseDemoMode(creativeDNA)) {
+          const demoData = loadDemoFixture('adaptation-plan');
+          if (demoData) {
+            console.log('Using demo fixture due to quota limit');
+            return NextResponse.json({
+              success: true,
+              data: demoData,
+              mode: 'demo',
+              reason: 'quota_exceeded'
+            });
+          }
+        }
+      }
 
       return NextResponse.json(
         {

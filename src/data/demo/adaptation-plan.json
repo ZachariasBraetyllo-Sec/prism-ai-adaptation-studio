@@ -1,0 +1,394 @@
+{
+  "id": "9075f354-8eac-44bb-b7e4-3c89d37de368",
+  "version": "1.0.0",
+  "creativeDnaId": "3ac22170-4ea2-4e21-85d4-feb805a41151",
+  "sourceWork": {
+    "title": "The Last Bloom",
+    "medium": "short_story"
+  },
+  "targetMedium": {
+    "medium": "film",
+    "format": "short film",
+    "estimatedLength": {
+      "value": 15,
+      "unit": "minutes"
+    },
+    "platform": "festival"
+  },
+  "overallStrategy": {
+    "approach": "interpretive",
+    "corePreservation": [
+      "Maya's emotional journey from distance to connection",
+      "The greenhouse as a living, breathing space",
+      "The memory orchid's symbolic bloom",
+      "The theme of patient, invisible care"
+    ],
+    "targetAudienceAdjustments": "Maintain contemplative tone while using visual storytelling to replace internal monologue"
+  },
+  "recommendations": [
+    {
+      "recommendationId": "1900c131-9e01-4e9e-b611-e0295ff3be89",
+      "category": "opening",
+      "title": "Visual Opening: Orchid First",
+      "proposedChange": "Open with a close-up of the memory orchid bud in twilight colors, then cut to Maya's car arriving at the property. Establish the greenhouse visually before Maya enters.",
+      "sourceEvidence": {
+        "elements": [
+          "The memory orchid",
+          "Maya's arrival",
+          "Greenhouse setting"
+        ],
+        "context": "The story opens with Maya's arrival, but the orchid is the central symbol",
+        "quotes": [
+          "The orchid's petals were the color of twilight, that impossible moment between day and night"
+        ]
+      },
+      "reasoning": "A visual-first opening creates immediate intrigue and establishes the magical realism tone. Starting with the orchid honors its symbolic importance while the cut to Maya's arrival provides human context.",
+      "mediumPrinciple": {
+        "principle": "Show, Don't Tell",
+        "explanation": "Film excels at visual establishment. Opening with the orchid creates a visual hook that would take paragraphs to describe in prose."
+      },
+      "creativeBenefit": {
+        "primary": "Immediately establishes tone and central symbol",
+        "secondary": [
+          "Creates visual mystery",
+          "Sets magical realism aesthetic",
+          "Provides strong opening image"
+        ],
+        "audienceImpact": "Hooks viewers with beauty and mystery in the first seconds"
+      },
+      "potentialRisk": {
+        "risks": [
+          "May confuse viewers about whose story this is",
+          "Could feel too abstract"
+        ],
+        "severity": "low",
+        "mitigation": "Quick cut to Maya ensures human connection within first 30 seconds",
+        "tradeoffs": "Slight delay in protagonist introduction for stronger thematic opening"
+      },
+      "confidence": {
+        "score": 0.85,
+        "factors": {
+          "sourceClarity": "clear",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": []
+      },
+      "alternativeApproach": {
+        "approach": "Open with Maya in her city apartment, establishing her modern life before the greenhouse",
+        "comparison": "Provides more character context but loses the immediate visual hook",
+        "whenToConsider": "If test audiences need more grounding in Maya's world"
+      },
+      "decisionStatus": "proposed",
+      "priority": "high"
+    },
+    {
+      "recommendationId": "6ce824ab-a779-4a35-a230-ffbd13fe95d0",
+      "category": "character",
+      "title": "Externalize Internal Conflict Through Actions",
+      "proposedChange": "Replace Maya's internal monologue about her past with visual actions: hesitating at the greenhouse door, touching plants tentatively, finding her grandmother's journals and reading them with visible emotion.",
+      "sourceEvidence": {
+        "elements": [
+          "Maya's internal thoughts",
+          "Her memories of the greenhouse",
+          "The argument"
+        ],
+        "context": "The story contains extensive internal reflection that needs visual translation",
+        "quotes": [
+          "She'd spent fifteen years building a life that looked nothing like this"
+        ]
+      },
+      "reasoning": "Film requires externalizing internal states. Physical hesitation, careful movements, and reactions to discovered objects can convey Maya's emotional journey without voiceover.",
+      "mediumPrinciple": {
+        "principle": "Action Reveals Character",
+        "explanation": "In film, we understand characters through what they do, not what they think. Physical behavior and reactions replace internal monologue."
+      },
+      "creativeBenefit": {
+        "primary": "Makes Maya's emotional state visible and cinematic",
+        "secondary": [
+          "Allows for powerful silent moments",
+          "Creates opportunities for visual storytelling",
+          "Maintains pacing"
+        ],
+        "audienceImpact": "Audiences read emotion through behavior, creating active engagement"
+      },
+      "potentialRisk": {
+        "risks": [
+          "Subtlety might be missed",
+          "Requires strong performance",
+          "Some nuance may be lost"
+        ],
+        "severity": "medium",
+        "mitigation": "Careful direction and shot selection to emphasize key emotional beats",
+        "tradeoffs": "Some internal complexity traded for visual clarity"
+      },
+      "confidence": {
+        "score": 0.88,
+        "factors": {
+          "sourceClarity": "clear",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": [
+          "Depends heavily on actor's ability to convey emotion physically"
+        ]
+      },
+      "alternativeApproach": {
+        "approach": "Use minimal voiceover for key internal moments",
+        "comparison": "Preserves some internal voice but risks feeling literary rather than cinematic",
+        "whenToConsider": "If physical performance alone doesn't convey sufficient depth"
+      },
+      "decisionStatus": "proposed",
+      "priority": "high"
+    },
+    {
+      "recommendationId": "82c15301-33c8-4fde-8344-bf747dcaee06",
+      "category": "structure",
+      "title": "Compress Timeline to Single Day",
+      "proposedChange": "Condense the story to take place over one day—from Maya's morning arrival to evening departure—with the orchid bloom happening in real time during her visit.",
+      "sourceEvidence": {
+        "elements": [
+          "Maya's visit",
+          "The orchid bloom",
+          "Her decision to return"
+        ],
+        "context": "The story implies multiple visits, but the core transformation happens during the bloom",
+        "quotes": [
+          "She watched until the light began to fade"
+        ]
+      },
+      "reasoning": "A single-day timeframe creates urgency and unity of time, classical dramatic principles that work well for short films. The orchid's bloom becomes the ticking clock.",
+      "mediumPrinciple": {
+        "principle": "Unity of Time",
+        "explanation": "Concentrating action into a compressed timeframe increases dramatic intensity and is ideal for short film format."
+      },
+      "creativeBenefit": {
+        "primary": "Creates natural dramatic structure and pacing",
+        "secondary": [
+          "Provides built-in time pressure",
+          "Simplifies production",
+          "Maintains focus"
+        ],
+        "audienceImpact": "Audiences experience the transformation in real time, increasing emotional investment"
+      },
+      "potentialRisk": {
+        "risks": [
+          "May feel rushed",
+          "Reduces sense of Maya's ongoing commitment",
+          "Less time for reflection"
+        ],
+        "severity": "medium",
+        "mitigation": "Use visual time passage (light changes, orchid opening) to create sense of duration within the day",
+        "tradeoffs": "Immediate transformation versus gradual change"
+      },
+      "confidence": {
+        "score": 0.78,
+        "factors": {
+          "sourceClarity": "moderate",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": [
+          "Whether single-day timeframe allows sufficient emotional development"
+        ]
+      },
+      "alternativeApproach": {
+        "approach": "Show multiple visits over several days with time jumps",
+        "comparison": "Allows more gradual transformation but complicates structure for short format",
+        "whenToConsider": "If single-day feels too compressed for believable character change"
+      },
+      "decisionStatus": "proposed",
+      "priority": "medium"
+    },
+    {
+      "recommendationId": "ad048cc1-d6e8-4a6c-b9ab-82338db640fe",
+      "category": "dialogue",
+      "title": "Minimize Dialogue, Maximize Silence",
+      "proposedChange": "Reduce dialogue to essential moments only. Let the greenhouse sounds (water, rustling leaves, Maya's footsteps) and the visual storytelling carry most scenes. Maya speaks primarily when reading her grandmother's journal entries aloud.",
+      "sourceEvidence": {
+        "elements": [
+          "The contemplative tone",
+          "Maya's isolation",
+          "The greenhouse atmosphere"
+        ],
+        "context": "The story is introspective and quiet, with minimal dialogue",
+        "quotes": [
+          "Some moments weren't meant to be captured, only witnessed"
+        ]
+      },
+      "reasoning": "The story's contemplative nature translates well to a dialogue-light approach. Silence emphasizes Maya's isolation and allows the greenhouse to become a character through sound design.",
+      "mediumPrinciple": {
+        "principle": "Sound and Silence",
+        "explanation": "Strategic use of silence in film creates space for reflection and emphasizes when characters do speak."
+      },
+      "creativeBenefit": {
+        "primary": "Maintains story's contemplative, meditative quality",
+        "secondary": [
+          "Allows sound design to shine",
+          "Creates intimate atmosphere",
+          "Emphasizes key spoken moments"
+        ],
+        "audienceImpact": "Silence draws audiences into Maya's internal experience and the greenhouse's atmosphere"
+      },
+      "potentialRisk": {
+        "risks": [
+          "May feel too slow for some audiences",
+          "Requires strong visual storytelling",
+          "Could be perceived as pretentious"
+        ],
+        "severity": "medium",
+        "mitigation": "Ensure visual storytelling is clear and engaging; use greenhouse sounds to maintain audio interest",
+        "tradeoffs": "Accessibility versus artistic integrity"
+      },
+      "confidence": {
+        "score": 0.72,
+        "factors": {
+          "sourceClarity": "clear",
+          "mediumFit": "moderate",
+          "precedent": "emerging"
+        },
+        "uncertainties": [
+          "Festival audience tolerance for minimal dialogue",
+          "Whether silence will read as contemplative or slow"
+        ]
+      },
+      "alternativeApproach": {
+        "approach": "Include more dialogue between Maya and a secondary character (friend, mother) via phone",
+        "comparison": "Provides exposition and external perspective but breaks the intimate isolation",
+        "whenToConsider": "If test audiences need more verbal context or connection"
+      },
+      "decisionStatus": "proposed",
+      "priority": "medium"
+    },
+    {
+      "recommendationId": "4b8604f6-69e8-441c-a724-2482e17e1200",
+      "category": "theme",
+      "title": "Add Parallel Storyline: Maya's Career Crisis",
+      "proposedChange": "Intercut Maya's greenhouse visit with flashbacks or phone calls about a major career decision she's avoiding, creating explicit parallel between her professional and personal avoidance of commitment.",
+      "sourceEvidence": {
+        "elements": [
+          "Maya's career focus",
+          "Her constructed independence",
+          "The theme of avoidance"
+        ],
+        "context": "The story mentions Maya's career-driven life as contrast to the greenhouse",
+        "quotes": [
+          "Her corner office, her apartment with clean lines and minimal maintenance"
+        ]
+      },
+      "reasoning": "Adding a concrete external conflict (career decision) would provide a more traditional dramatic structure and make Maya's internal conflict more tangible and relatable.",
+      "mediumPrinciple": {
+        "principle": "External Conflict",
+        "explanation": "Film often benefits from external manifestations of internal conflict to create visible stakes."
+      },
+      "creativeBenefit": {
+        "primary": "Creates more obvious dramatic tension",
+        "secondary": [
+          "Provides clear before/after contrast",
+          "Makes themes more explicit",
+          "Adds conventional story structure"
+        ],
+        "audienceImpact": "Gives audiences a concrete problem to track alongside emotional journey"
+      },
+      "potentialRisk": {
+        "risks": [
+          "Dilutes the story's focus",
+          "Makes themes too obvious",
+          "Adds unnecessary complexity",
+          "Breaks the greenhouse's isolation"
+        ],
+        "severity": "high",
+        "mitigation": "Keep career elements minimal and clearly secondary to greenhouse journey",
+        "tradeoffs": "Clarity and conventional structure versus focused, contemplative narrative"
+      },
+      "confidence": {
+        "score": 0.45,
+        "factors": {
+          "sourceClarity": "moderate",
+          "mediumFit": "moderate",
+          "precedent": "established"
+        },
+        "uncertainties": [
+          "Whether added plot complexity serves or distracts from core story",
+          "Risk of making subtle story too obvious"
+        ]
+      },
+      "alternativeApproach": {
+        "approach": "Keep story focused solely on greenhouse experience without external plot",
+        "comparison": "Maintains purity and focus but may feel too internal for some viewers",
+        "whenToConsider": "If the greenhouse journey alone provides sufficient dramatic interest"
+      },
+      "decisionStatus": "proposed",
+      "priority": "low"
+    },
+    {
+      "recommendationId": "50c56b88-8bbe-44f9-a44b-9c0f7f337f95",
+      "category": "closing",
+      "title": "End with Ambiguous Future",
+      "proposedChange": "End with Maya locking the greenhouse door and pocketing the key, but don't explicitly show her returning. Leave her commitment to return implied rather than stated, ending on the image of the glowing orchid through the glass.",
+      "sourceEvidence": {
+        "elements": [
+          "Maya's decision",
+          "The key",
+          "The orchid's glow"
+        ],
+        "context": "The story ends with Maya's decision to return but leaves the future open",
+        "quotes": [
+          "She walked back to her car as the last light drained from the sky, the key warm in her pocket"
+        ]
+      },
+      "reasoning": "An ambiguous ending respects the audience's intelligence and maintains the story's contemplative tone. The key in her pocket and her changed demeanor suggest commitment without spelling it out.",
+      "mediumPrinciple": {
+        "principle": "Show, Don't Tell",
+        "explanation": "Film can convey future intention through present action and symbolic imagery without explicit resolution."
+      },
+      "creativeBenefit": {
+        "primary": "Maintains artistic integrity and respects audience",
+        "secondary": [
+          "Leaves room for interpretation",
+          "Avoids overly neat resolution",
+          "Emphasizes the moment over the future"
+        ],
+        "audienceImpact": "Audiences leave thinking about Maya's choice and their own relationships to care and commitment"
+      },
+      "potentialRisk": {
+        "risks": [
+          "Some audiences may want clearer resolution",
+          "Could feel incomplete",
+          "May be seen as unsatisfying"
+        ],
+        "severity": "medium",
+        "mitigation": "Ensure Maya's emotional transformation is clear even if future actions are ambiguous",
+        "tradeoffs": "Ambiguity and artistic sophistication versus clear narrative closure"
+      },
+      "confidence": {
+        "score": 0.82,
+        "factors": {
+          "sourceClarity": "clear",
+          "mediumFit": "strong",
+          "precedent": "established"
+        },
+        "uncertainties": [
+          "Festival audience preference for ambiguous versus resolved endings"
+        ]
+      },
+      "alternativeApproach": {
+        "approach": "Show Maya returning the next day, beginning to tend the plants",
+        "comparison": "Provides clear resolution and shows commitment but may feel too neat",
+        "whenToConsider": "If test audiences express frustration with ambiguity"
+      },
+      "decisionStatus": "proposed",
+      "priority": "medium"
+    }
+  ],
+  "aiAnalysis": {
+    "model": "IBM Granite 4.0 H Small",
+    "analysisDate": "2024-01-15T10:15:00Z",
+    "parameters": {
+      "temperature": 0.1,
+      "max_tokens": 4000
+    }
+  },
+  "createdAt": "2024-01-15T10:15:00Z",
+  "updatedAt": "2024-01-15T10:15:00Z"
+}

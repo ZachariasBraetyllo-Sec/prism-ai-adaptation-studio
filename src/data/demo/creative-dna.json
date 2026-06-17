@@ -1,0 +1,182 @@
+{
+  "id": "3ac22170-4ea2-4e21-85d4-feb805a41151",
+  "version": "1.0.0",
+  "sourceWork": {
+    "title": "The Last Bloom",
+    "medium": "short_story",
+    "genre": [
+      "literary fiction",
+      "magical realism"
+    ],
+    "creator": "Prism AI Adaptation Studio",
+    "publicationYear": 2024,
+    "synopsis": "Maya returns to her grandmother's greenhouse fifteen years after a painful argument, discovering a rare orchid that blooms once every fifteen years—on the exact day of her return. Through tending the greenhouse and witnessing the bloom, she learns about patience, care, and the possibility of reconciliation with the past."
+  },
+  "coreElements": {
+    "premise": "A woman returns to her estranged grandmother's greenhouse after her death and discovers a rare orchid blooming for the first time in fifteen years, leading her to understand the value of patient, invisible care.",
+    "centralConflict": "Maya's struggle between her carefully constructed independent life and the terrifying vulnerability of loving something (or someone) that requires ongoing care and can be lost.",
+    "uniqueHook": "A memory orchid that blooms once every fifteen years, timed perfectly to Maya's return, serving as both a literal inheritance and a metaphor for delayed understanding.",
+    "keySymbols": [
+      {
+        "symbol": "The Memory Orchid",
+        "meaning": "Represents delayed gratification, patient love, and the beauty that emerges from consistent, invisible care"
+      },
+      {
+        "symbol": "The Greenhouse",
+        "meaning": "A space of vulnerability and growth, where care is visible and necessary"
+      },
+      {
+        "symbol": "The Key",
+        "meaning": "Access to understanding, inheritance, and the choice to return"
+      }
+    ]
+  },
+  "narrativeStructure": {
+    "structure": "three_act",
+    "pacing": "moderate",
+    "pointOfView": "third_person_limited",
+    "timelineComplexity": "flashbacks",
+    "plotPoints": [
+      {
+        "name": "The Key Arrives",
+        "description": "Maya receives the greenhouse key three days after her grandmother's funeral",
+        "importance": "critical"
+      },
+      {
+        "name": "Return to the Greenhouse",
+        "description": "Maya enters the greenhouse for the first time in fifteen years",
+        "importance": "critical"
+      },
+      {
+        "name": "Discovery of the Memory Orchid",
+        "description": "Maya finds the rare orchid blooming in the special collection room",
+        "importance": "critical"
+      },
+      {
+        "name": "Emotional Breakthrough",
+        "description": "Maya realizes her grandmother timed everything for this moment of understanding",
+        "importance": "critical"
+      },
+      {
+        "name": "Decision to Return",
+        "description": "Maya commits to coming back and learning to tend the greenhouse",
+        "importance": "critical"
+      }
+    ]
+  },
+  "thematicElements": {
+    "primaryThemes": [
+      "The value of patient, consistent care",
+      "Reconciliation with the past",
+      "The vulnerability required for love"
+    ],
+    "secondaryThemes": [
+      "Independence versus connection",
+      "Visible versus invisible work",
+      "Inheritance and legacy"
+    ],
+    "moralQuestions": [
+      "What do we lose when we prioritize efficiency over care?",
+      "Can we reconcile with those we've hurt after they're gone?",
+      "What does it mean to truly tend to something or someone?"
+    ],
+    "socialCommentary": "Explores modern tension between career-driven independence and the slower, more vulnerable work of maintaining relationships and traditions"
+  },
+  "characterArchetypes": [
+    {
+      "id": "ee1ea08b-7588-4901-8346-7beb141fff60",
+      "name": "Maya",
+      "archetype": "hero",
+      "role": "protagonist",
+      "traits": [
+        "independent",
+        "efficient",
+        "guarded",
+        "career-focused",
+        "emotionally distant"
+      ],
+      "arc": "From someone who fled vulnerability and care to someone who chooses to return and learn the language of tending"
+    },
+    {
+      "id": "8c82360f-a534-49df-b2ff-33c5b9cf02ec",
+      "name": "Grandmother",
+      "archetype": "mentor",
+      "role": "supporting",
+      "traits": [
+        "patient",
+        "wise",
+        "devoted",
+        "understanding",
+        "forward-thinking"
+      ],
+      "arc": "Posthumous mentor whose final lesson is delivered through the orchid's bloom"
+    }
+  ],
+  "worldBuilding": {
+    "setting": "A glass greenhouse on the edge of a property, filled with carefully tended plants",
+    "timeframe": "contemporary",
+    "worldType": "magical_realism",
+    "atmosphere": "Humid, intimate, alive with growth; a space that feels like breathing"
+  },
+  "emotionalTone": {
+    "overallTone": "melancholic",
+    "emotionalRange": [
+      "grief",
+      "regret",
+      "wonder",
+      "hope",
+      "acceptance"
+    ],
+    "intensity": "moderate",
+    "humorStyle": "none"
+  },
+  "targetAudience": {
+    "ageRange": "adult",
+    "contentRating": "PG",
+    "contentWarnings": [
+      "grief",
+      "family estrangement"
+    ],
+    "audienceAppeal": [
+      "Readers interested in family relationships",
+      "Those who appreciate magical realism",
+      "Audiences drawn to quiet, contemplative narratives"
+    ]
+  },
+  "adaptationConsiderations": {
+    "strengths": [
+      "Strong visual imagery (greenhouse, orchid, light)",
+      "Clear emotional arc",
+      "Symbolic elements that translate well to screen",
+      "Intimate scale suitable for short film"
+    ],
+    "challenges": [
+      "Much of the conflict is internal",
+      "Relies heavily on Maya's interior monologue",
+      "Flashback structure needs careful handling",
+      "Risk of being too quiet or slow for some audiences"
+    ],
+    "essentialElements": [
+      "The greenhouse setting",
+      "The memory orchid and its bloom",
+      "Maya's emotional journey from distance to connection",
+      "The sense of her grandmother's presence through the space"
+    ],
+    "flexibleElements": [
+      "Specific details of Maya's career",
+      "The exact nature of the original argument",
+      "Secondary characters or relationships",
+      "Timeline compression"
+    ]
+  },
+  "metadata": {
+    "analysisMethod": "ai_generated",
+    "confidence": 0.95,
+    "contributors": [
+      "IBM Granite 4.0 H Small"
+    ],
+    "notes": "Demo fixture for Prism AI Adaptation Studio"
+  },
+  "createdAt": "2024-01-15T10:00:00Z",
+  "updatedAt": "2024-01-15T10:00:00Z"
+}

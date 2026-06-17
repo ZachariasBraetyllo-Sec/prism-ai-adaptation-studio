@@ -79,6 +79,27 @@ function isValidUUID(str: string): boolean {
   return typeof str === 'string' && uuidRegex.test(str);
 }
 
+// Helper function to check if demo mode should be used
+function shouldUseDemoMode(creativeDNA: any): boolean {
+  const demoMode = process.env.PRISM_DEMO_MODE === 'true';
+  const isDemoStory = creativeDNA?.sourceWork?.title?.includes('The Last Bloom') ||
+                      creativeDNA?.coreElements?.premise?.includes('memory orchid') ||
+                      creativeDNA?.coreElements?.premise?.includes('Maya');
+  return demoMode && isDemoStory;
+}
+
+// Helper function to load demo fixture
+function loadDemoFixture(fixtureName: string): any {
+  try {
+    const fixturePath = join(process.cwd(), 'src', 'data', 'demo', `${fixtureName}.json`);
+    const fixtureData = readFileSync(fixturePath, 'utf-8');
+    return JSON.parse(fixtureData);
+  } catch (error) {
+    console.error(`Failed to load demo fixture ${fixtureName}:`, error);
+    return null;
+  }
+}
+
 export async function POST(request: Request) {
   try {
     // Read and parse request body with error handling
@@ -231,6 +252,22 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if demo mode should be used
+    if (shouldUseDemoMode(creativeDNA)) {
+      console.log('Using demo mode for Production Blueprint generation');
+      const demoData = loadDemoFixture('production-blueprint');
+      
+      if (demoData) {
+        return NextResponse.json({
+          success: true,
+          data: demoData,
+          mode: 'demo'
+        });
+      } else {
+        console.warn('Demo fixture not available, falling back to live AI');
+      }
+    }
+
     // Read environment variables
     const apiKey = process.env.WATSONX_API_KEY;
     const projectId = process.env.WATSONX_PROJECT_ID;
@@ -350,6 +387,23 @@ Generate a complete Production Blueprint in valid JSON format matching the Produ
       console.error('Status:', response.status);
       console.error('Response body:', errorText);
 
+      // Check for quota exceeded error and fall back to demo if available
+      if (response.status === 403 && errorText.includes('token_quota_reached')) {
+        console.log('Token quota exceeded, attempting demo fallback');
+        if (shouldUseDemoMode(creativeDNA)) {
+          const demoData = loadDemoFixture('production-blueprint');
+          if (demoData) {
+            console.log('Using demo fixture due to quota limit');
+            return NextResponse.json({
+              success: true,
+              data: demoData,
+              mode: 'demo',
+              reason: 'quota_exceeded'
+            });
+          }
+        }
+      }
+
       return NextResponse.json(
         {
           success: false,
@@ -453,6 +507,53 @@ Generate a complete Production Blueprint in valid JSON format matching the Produ
     if (!productionBlueprint.blueprintId || !isValidUUID(productionBlueprint.blueprintId)) {
       productionBlueprint.blueprintId = crypto.randomUUID();
       console.log('Generated blueprintId:', productionBlueprint.blueprintId);
+    }
+
+    // Normalize productionConsiderations.essentialNeeds[].category
+    if (productionBlueprint.productionConsiderations?.essentialNeeds) {
+      const allowedCategories = [
+        'location', 'cast', 'props', 'wardrobe', 'lighting', 'sound',
+        'visual-effects', 'special-effects', 'blocking', 'weather',
+        'continuity', 'accessibility', 'other'
+      ];
+
+      const categoryMappings: Record<string, string> = {
+        'locations': 'location',
+        'setting': 'location',
+        'venue': 'location',
+        'casting': 'cast',
+        'actors': 'cast',
+        'talent': 'cast',
+        'prop': 'props',
+        'costume': 'wardrobe',
+        'costumes': 'wardrobe',
+        'audio': 'sound',
+        'vfx': 'visual-effects',
+        'visual-effects-requirements': 'visual-effects',
+        'sfx': 'special-effects',
+        'practical-effects': 'special-effects',
+        'choreography': 'blocking',
+        'staging': 'blocking',
+        'access': 'accessibility'
+      };
+
+      productionBlueprint.productionConsiderations.essentialNeeds.forEach((need: any) => {
+        if (need.category && typeof need.category === 'string') {
+          // Lowercase, trim, convert spaces/underscores to hyphens
+          let normalized = need.category.toLowerCase().trim().replace(/[\s_]+/g, '-');
+          
+          // Check if already valid
+          if (allowedCategories.includes(normalized)) {
+            need.category = normalized;
+          } else if (categoryMappings[normalized]) {
+            // Apply mapping
+            need.category = categoryMappings[normalized];
+          } else {
+            // Use "other" as fallback
+            need.category = 'other';
+          }
+        }
+      });
     }
 
     // Validate the Production Blueprint against schema using Ajv
